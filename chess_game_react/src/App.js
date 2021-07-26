@@ -3,7 +3,7 @@ import Chessboard from './components/Chessboard';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{width: "800px"}}>
       <Chessboard />
     </div>
   );
