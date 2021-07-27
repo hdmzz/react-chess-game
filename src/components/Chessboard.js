@@ -1,4 +1,5 @@
 import React from 'react'
+import './chessboard.css'
 
 export default function Chessboard() {
     const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -9,20 +10,30 @@ export default function Chessboard() {
     verticalIndex.map(vIndex => {
         horizontalIndex.map(hIndex => {
             const position = [vIndex, hIndex]
-            board.push(position)
-            console.log(board.indexOf(position));
+            const number = verticalIndex.indexOf(vIndex) + horizontalIndex.indexOf(hIndex) + 2 //on fait la somme des index des indexs vert et horizon pour determienr la couleur des cases
+            if (number % 2 === 0 ) {//l'operateur % renvoie le reste donc 1 si impair ou 0 si pair
+                board.push(
+                    <div key={position} className="boxWhite">
+                        {position}
+                    </div>
+                )
+            } else {
+                board.push(
+                    <div key={position} className="boxBlack">
+                        {position}
+                    </div>
+                )
+            }
+            // // la somme est pair alors couleur clair et inversement 
+             //comme la somme des premiers indexs ets egal à 0 alors il faut ajouter 2 à cette somme et verifier si la somme est divisible par 2 
         })
-    })
+    }) 
     return (
         <>
             <div>
                 {board && (
                     <div id="chessBoard">
-                        {board.map(box => (
-                            <div style={{height:"100px",border: "1px black solid"}}> 
-                                {box}
-                            </div>
-                        ))}
+                        {board}
                     </div>
                 )}
             </div>
