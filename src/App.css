@@ -5,8 +5,8 @@
 }
 #chessBoard {
     display: grid;
-    grid-template-columns: repeat(8,100px);
-    grid-template-rows: repeat(8,100px);
+    grid-template-columns: repeat(8, 99px);
+    grid-template-rows: repeat(8, 99px);
     max-width: 500px;
     max-height: 500px;
 }
