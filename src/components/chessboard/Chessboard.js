@@ -18,10 +18,10 @@ export default function Chessboard() {
 
 
 
-    for (let j = verticalIndex.length; j >= 0; j--){
+    for (let j = verticalIndex.length - 1; j >= 0; j--){
         for (let i = 0; i < horizontalIndex.length; i++){
             const number = j + i + 2
-            board.push(<Tile number={number}/>)
+            board.push(<Tile number={number} iIndex={i} jIndex={j}/>)
         }
     }
     return (

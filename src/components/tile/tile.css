@@ -1,0 +1,13 @@
+.boxWhite {
+    display: grid;
+    place-content: center;
+    background-color: white;
+}
+.boxBlack {
+    display: grid;
+    place-content: center;
+    background-color: slateblue;
+}
+img{
+    margin: auto;
+}

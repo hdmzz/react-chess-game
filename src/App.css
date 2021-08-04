@@ -3,10 +3,3 @@
     height: 100vh;
     margin:auto;
 }
-#chessBoard {
-    display: grid;
-    grid-template-columns: repeat(8, 99px);
-    grid-template-rows: repeat(8, 99px);
-    max-width: 500px;
-    max-height: 500px;
-}
