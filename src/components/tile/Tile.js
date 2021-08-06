@@ -1,7 +1,7 @@
 import React from 'react'
 import './tile.css'
 
-export default function Tile({ number, iIndex,jIndex }) {
+export default function Tile({ number, iIndex, jIndex }) {
     if (number % 2 === 0) {
         return (
             <div className="boxWhite">
