@@ -25,25 +25,12 @@ export default function Chessboard() {
         pieces.push({ image: `../../images/king_${type}.png`, x: 3, y })
         pieces.push({ image: `../../images/queen_${type}.png`, x: 4, y })
     }
-    /* //Tours
-    pieces.push({ image: "../../images/rook_w.png", x: 0, y: 0 })
-    pieces.push({ image: "../../images/rook_w.png", x: 7, y: 0 })
 
-    //Chevaliers
-    pieces.push({ image: "../../images/knight_w.png", x: 1, y: 0 })
-    pieces.push({ image: "../../images/knight_w.png", x: 6, y: 0 })
-
-    //Fous
-    pieces.push({ image: "../../images/bishop_w.png", x: 2, y: 0 })
-    pieces.push({ image: "../../images/bishop_w.png", x: 5, y: 0 })
-    
-    //Rois Reine
-    pieces.push({ image: "../../images/queen_w.png", x: 3, y: 0 })
-    pieces.push({ image: "../../images/king_w.png", x: 4, y: 0 }) */
-
-
-
-
+function grabPiece(e){
+    if (e.target.className === 'boxWhite' ) {
+        console.log('white');
+    }
+}
 
 
 
@@ -58,12 +45,12 @@ export default function Chessboard() {
                     image = p.image
                 }
             })
-            board.push(<Tile number={number} image={image} j={j} i={i}/>)
+            board.push(<Tile key={`${i},${j}`} number={number} image={image} j={j} i={i}/>)
         }
     }
     return (
         <div className="container">
-            <div id="chessboard">
+            <div onMouseDown={e => grabPiece(e)} id="chessboard">
                 {board}
             </div>
         </div>

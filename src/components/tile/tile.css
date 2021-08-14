@@ -11,3 +11,16 @@
 img{
     margin: auto;
 }
+.piece{
+    height: 100px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+.piece:hover{
+    cursor: grab;
+}
+.piece:active{
+    cursor: grabbing;
+}
