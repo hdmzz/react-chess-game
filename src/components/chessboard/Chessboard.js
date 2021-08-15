@@ -26,13 +26,21 @@ export default function Chessboard() {
         pieces.push({ image: `../../images/queen_${type}.png`, x: 4, y })
     }
 
-function grabPiece(e){
-    if (e.target.className === 'boxWhite' ) {
-        console.log('white');
+    let activePiece;
+
+    function grabPiece(e){
+        const element = e.target 
+        if (e.target.className === 'piece') {
+            const x = e.clientX
+            const y = e.clientY
+            element.style.position = 'absolute'
+            
+        }
     }
-}
 
-
+    function movePiece(e) {
+        console.log(e.target);
+    }
 
 
     for (let j = verticalIndex.length - 1; j >= 0; j--){
@@ -50,7 +58,7 @@ function grabPiece(e){
     }
     return (
         <div className="container">
-            <div onMouseDown={e => grabPiece(e)} id="chessboard">
+            <div onMouseMove={e => movePiece(e)} onMouseDown={e => grabPiece(e)} id="chessboard">
                 {board}
             </div>
         </div>
