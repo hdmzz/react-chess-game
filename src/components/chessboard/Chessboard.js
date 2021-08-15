@@ -31,15 +31,23 @@ export default function Chessboard() {
     function grabPiece(e){
         const element = e.target 
         if (e.target.className === 'piece') {
-            const x = e.clientX
-            const y = e.clientY
+            const x = e.clientX - 50
+            const y = e.clientY - 50
             element.style.position = 'absolute'
-            
+            element.style.left = `${x}px`
+            element.style.top = `${y}px`
         }
+        activePiece = element
     }
-
+    
     function movePiece(e) {
-        console.log(e.target);
+        if (activePiece && activePiece.className === 'piece') {
+            const x = e.clientX - 50
+            const y = e.clientY - 50
+            activePiece.style.position = 'absolute'
+            activePiece.style.left = `${x}px`
+            activePiece.style.top = `${y}px`
+        }
     }
 
 
