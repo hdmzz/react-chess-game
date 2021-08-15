@@ -36,12 +36,12 @@ export default function Chessboard() {
             element.style.position = 'absolute'
             element.style.left = `${x}px`
             element.style.top = `${y}px`
+            activePiece = element
         }
-        activePiece = element
     }
     
     function movePiece(e) {
-        if (activePiece && activePiece.className === 'piece') {
+        if (activePiece) {
             const x = e.clientX - 50
             const y = e.clientY - 50
             activePiece.style.position = 'absolute'
@@ -50,6 +50,11 @@ export default function Chessboard() {
         }
     }
 
+    function dropPiece(e) {
+        if (activePiece){
+            activePiece = null
+        }
+    }
 
     for (let j = verticalIndex.length - 1; j >= 0; j--){
         for (let i = 0; i < horizontalIndex.length; i++){
@@ -66,7 +71,11 @@ export default function Chessboard() {
     }
     return (
         <div className="container">
-            <div onMouseMove={e => movePiece(e)} onMouseDown={e => grabPiece(e)} id="chessboard">
+            <div 
+            onMouseMove={e => movePiece(e)}
+            onMouseDown={e => grabPiece(e)} 
+            onMouseUp={e => dropPiece(e)}
+            id="chessboard">
                 {board}
             </div>
         </div>
