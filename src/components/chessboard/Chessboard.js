@@ -1,32 +1,31 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"]
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
+let initialeBoardState = []
+for (let i = 0; i < 8; i++){
+    initialeBoardState.push({ image: "../../images/pawn_b.png", x: i, y: 6 })
+    initialeBoardState.push({ image: "../../images/pawn_w.png", x: i, y: 1 })
+}
+
+for (let p = 0; p < 2; p++) {
+    const type = (p === 0) ? "b" : "w"
+    const y = (p === 0) ? 7 : 0
+    initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 0, y })
+    initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 7, y })
+    initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 1, y })
+    initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 6, y })
+    initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 2, y })
+    initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 5, y })
+    initialeBoardState.push({ image: `../../images/king_${type}.png`, x: 3, y })
+    initialeBoardState.push({ image: `../../images/queen_${type}.png`, x: 4, y })
+}
 export default function Chessboard() {
-    const pieces = []
+    const [pieces, setPieces] = useState(initialeBoardState)
     const chessboardRef=useRef()
     let board = []
-
-    for (let i = 0; i < 8; i++){
-        pieces.push({ image: "../../images/pawn_b.png", x: i, y: 6 })
-        pieces.push({ image: "../../images/pawn_w.png", x: i, y: 1 })
-    }
-
-    for (let p = 0; p < 2; p++) {
-        const type = (p === 0) ? "b" : "w"
-        const y = (p === 0) ? 7 : 0
-        pieces.push({ image: `../../images/rook_${type}.png`, x: 0, y })
-        pieces.push({ image: `../../images/rook_${type}.png`, x: 7, y })
-        pieces.push({ image: `../../images/knight_${type}.png`, x: 1, y })
-        pieces.push({ image: `../../images/knight_${type}.png`, x: 6, y })
-        pieces.push({ image: `../../images/bishop_${type}.png`, x: 2, y })
-        pieces.push({ image: `../../images/bishop_${type}.png`, x: 5, y })
-        pieces.push({ image: `../../images/king_${type}.png`, x: 3, y })
-        pieces.push({ image: `../../images/queen_${type}.png`, x: 4, y })
-    }
-
     let activePiece;
 
     function grabPiece(e){
@@ -77,7 +76,19 @@ export default function Chessboard() {
     }
 
     function dropPiece(e) {
+        const chessboard = chessboardRef.current;
+        if (activePiece && chessboard) {
+            const x = Math.floor((e.clientX - chessboard.offsetLeft) / 100) ;
+            const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop -750) / 100)) ;
+            console.log(x, y);
+        }
         if (activePiece){
+            setPieces(value => {
+                const pieces = value.map(p => {
+                    return p
+                })
+                return pieces
+            })
             activePiece = null
         }
     }
@@ -92,7 +103,7 @@ export default function Chessboard() {
                     image = p.image
                 }
             })
-            board.push(<Tile key={`${i},${j}`} number={number} image={image} j={j} i={i}/>)
+            board.push(<Tile key={`${i},${j}`} number={number} image={image} i={i} j={j}/>)
         }
     }
     return (

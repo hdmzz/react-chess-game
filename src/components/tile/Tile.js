@@ -23,4 +23,4 @@ export default function Tile({ number, image, j, i}) {
         ) 
     }
 }
-/* l'image est mise en background d'une div de ce fait on ne peut pas 'prendre' l'image et l'ouvrir dans une autre fenetre par exmple */
+/* l'image est mise en background d'une de ce fait on ne peut pas 'prendre' l'image et l'ouvrir dans une autre fenetre par exmple */
