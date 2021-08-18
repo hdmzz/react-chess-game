@@ -1,13 +1,9 @@
-.container {
+
+#chessboard {
     border: solid;
     width: inherit;
     height: inherit;
-}
-
-#chessboard {
     display: grid;
     grid-template-columns: repeat(8, 90px);
     grid-template-rows: repeat(8, 90px);
-    max-width: 500px;
-    max-height: 500px;
 }
