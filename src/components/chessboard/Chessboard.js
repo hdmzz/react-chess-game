@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
+import { usePosition } from '../../context/PositionContext';
 import './chessboard.css'
 
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -29,11 +30,14 @@ export default function Chessboard() {
     const [pieces, setPieces] = useState(initialeBoardState);
     const [gridX, setX] = useState();//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [gridY, setY] = useState();
+    const [firstClick, setClick] = useState(true)
     const chessboardRef = useRef(null);
 
     function grabPiece(e){
+        console.log('hello');
         const chessboard = chessboardRef.current
         const element = e.target 
+        console.log(e);
         if (e.target.className === 'piece') {
             const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / 100)
             const grabY = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 800) / 100))
@@ -45,6 +49,7 @@ export default function Chessboard() {
             element.style.left = `${x}px`
             element.style.top = `${y}px`
             setActivePiece(element)
+            setClick(false)
         }
     }
     
@@ -84,12 +89,13 @@ export default function Chessboard() {
     }
     
     function dropPiece(e) {
+        console.log('drop it');
+        console.log(e);
         const chessboard = chessboardRef.current;
         if (activePiece && chessboard){
             const x = Math.floor((e.clientX - chessboard.offsetLeft) / 100) ;//on a des coordonnées de position
             const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 750) / 100));
-            const pieceTochange = pieces.filter(p => (p.x === gridX && p.y === gridY))
-            const piece = pieceTochange[0]
+            const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
             const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
             const newPositionPiece = {...piece, x: x, y: y}
             const newPieces = pieces
@@ -99,6 +105,7 @@ export default function Chessboard() {
             //on doit remplacer l'ancienne piece et les anciennes coordonnées par les nouvelles 
             //grace a l'index on peut utiliser le splice et remplacer lancienne piece positionnée par la nouvelle position
             setActivePiece(null)
+            setClick(true)
         }
     }
     
@@ -106,20 +113,21 @@ export default function Chessboard() {
     for (let j = verticalIndex.length - 1; j >= 0; j--){
         for (let i = 0; i < horizontalIndex.length; i++){
             const number = j + i + 2
+            const position = [ i , j ]
             let image = ""
             pieces.forEach(p => {
                 if (p.x === i && p.y === j) {
                     image = p.image
                 }
             })
-            board.push(<Tile key={`${i},${j}`} number={number} image={image} i={i} j={j}/>)
+            board.push(<Tile key={`${i},${j}`} number={number} image={image} position={position}/>)
         }
     }
     return (
         <div 
-        onMouseMove={e => movePiece(e)}
-        onMouseDown={e => grabPiece(e)} 
-        onMouseUp={e => dropPiece(e)}
+        //onMouseMove={e => movePiece(e)}
+        onClick={firstClick ? (e => grabPiece(e)) : (e => dropPiece(e)) } 
+        //onMouseUp={e => dropPiece(e)}
         id="chessboard"
         ref={chessboardRef}>
             {board}

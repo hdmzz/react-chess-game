@@ -1,26 +1,29 @@
-.boxWhite {
+.box {
     display: grid;
     place-content: center;
+    width: 100px;
+    height: 100px;
+
+}
+.boxWhite {
     background-color: white;
 }
 .boxBlack {
-    display: grid;
-    place-content: center;
     background-color: slateblue;
 }
 img{
     margin: auto;
 }
 .piece{
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: auto;
+    background-size: 80px;
 }
-.piece:hover{
+.box .piece:hover{
     cursor: grab;
 }
-.piece:active{
+.box .piece:active{
     cursor: grabbing;
 }
