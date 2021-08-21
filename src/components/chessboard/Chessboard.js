@@ -88,14 +88,14 @@ export default function Chessboard() {
         if (activePiece && chessboard){
             const x = Math.floor((e.clientX - chessboard.offsetLeft) / 100) ;//on a des coordonnées de position
             const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 750) / 100));
-            setPieces(value => {
-                const piece = pieces.filter(p => (p.x === gridX && p.y === gridY))
-                const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
-                const newPositionPiece = {...piece, x: x, y: y}
-                const newPieces = pieces
-                newPieces.splice(index, 1, newPositionPiece)            
-                return newPieces
-            })
+            const pieceTochange = pieces.filter(p => (p.x === gridX && p.y === gridY))
+            const piece = pieceTochange[0]
+            const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
+            const newPositionPiece = {...piece, x: x, y: y}
+            const newPieces = pieces
+            console.log(newPieces);
+            newPieces.splice(index, 1, newPositionPiece)            
+            setPieces(newPieces)
             //on doit remplacer l'ancienne piece et les anciennes coordonnées par les nouvelles 
             //grace a l'index on peut utiliser le splice et remplacer lancienne piece positionnée par la nouvelle position
             setActivePiece(null)
