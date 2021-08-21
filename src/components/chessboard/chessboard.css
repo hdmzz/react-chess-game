@@ -4,6 +4,6 @@
     width: inherit;
     height: inherit;
     display: grid;
-    grid-template-columns: repeat(8, 90px);
-    grid-template-rows: repeat(8, 90px);
+    grid-template-columns: repeat(8, 95px);
+    grid-template-rows: repeat(8, 95px);
 }

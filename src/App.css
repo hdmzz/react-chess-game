@@ -1,5 +1,4 @@
 .App {
-    width: 100vh;
-    height: 100vh;
-    margin:auto;
+    display: grid;
+    place-content: center;
 }

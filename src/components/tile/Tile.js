@@ -1,7 +1,7 @@
 import React from 'react'
 import './tile.css'
 
-export default function Tile({ number, image, j, i}) {
+export default function Tile({ number, image, i, j}) {
     /* let image = ""; 
     if (jIndex === 6) {
         image = "images/pawn_b.png"
@@ -12,12 +12,14 @@ export default function Tile({ number, image, j, i}) {
     if (number % 2 === 0) {
         return (
             <div className="boxWhite">
+                {/* {i}, {j} */}
                 {image && <div className="piece" style={{backgroundImage: `url(${image})`}}></div>} {/* si image non null alors on rend la div avec le background */}
             </div>
         )
     } else {
         return (
             <div className="boxBlack">
+                {/* {i}, {j} */}
                 {image && <div className="piece" style={{backgroundImage: `url(${image})`}}></div>}
             </div>
         ) 
