@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
-import { usePosition } from '../../context/PositionContext';
 import './chessboard.css'
 
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -37,23 +36,24 @@ export default function Chessboard() {
         console.log('hello');
         const chessboard = chessboardRef.current
         const element = e.target 
-        console.log(e);
+        console.log(element);
+        // offset est une valeur stable 
         if (e.target.className === 'piece') {
-            const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / 100)
-            const grabY = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 800) / 100))
+            const grabX = Math.floor(e.target.offsetLeft / 100)
+            const grabY = Math.floor(e.target.offsetTop / 100)
             setX(grabX)
             setY(grabY)
-            const x = e.clientX - 50;
-            const y = e.clientY - 50;
-            element.style.position = 'absolute'
-            element.style.left = `${x}px`
-            element.style.top = `${y}px`
+            //const x = (e.target.offsetLeft / 100);
+            //const y = (e.target.offsetTop / 100);
+            //element.style.position = 'absolute'
+            //element.style.left = `${x}px`
+            //element.style.top = `${y}px`
             setActivePiece(element)
             setClick(false)
         }
     }
     
-    function movePiece(e) {
+    /* function movePiece(e) {
         const chessboard = chessboardRef.current
         if (activePiece && chessboard) {
             const minX = chessboard.offsetLeft - 25;
@@ -69,7 +69,7 @@ export default function Chessboard() {
                 activePiece.style.left = `${minX}px`
             } else {
                 activePiece.style.left = `${x}px`
-            } */
+            } 
             if ( x < minX ) {
                 activePiece.style.left = `${minX}px` 
             } else if ( x > maxX ) {
@@ -86,20 +86,19 @@ export default function Chessboard() {
                 activePiece.style.top = `${y}px`
             }
         }
-    }
+    } */
     
     function dropPiece(e) {
         console.log('drop it');
         console.log(e);
         const chessboard = chessboardRef.current;
         if (activePiece && chessboard){
-            const x = Math.floor((e.clientX - chessboard.offsetLeft) / 100) ;//on a des coordonnées de position
-            const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 750) / 100));
+            const x = Math.floor(e.target.offsetLeft / 100) ;//on a des coordonnées de position
+            const y = Math.floor(e.target.offsetTop / 100);
             const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
             const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
             const newPositionPiece = {...piece, x: x, y: y}
             const newPieces = pieces
-            console.log(newPieces);
             newPieces.splice(index, 1, newPositionPiece)            
             setPieces(newPieces)
             //on doit remplacer l'ancienne piece et les anciennes coordonnées par les nouvelles 
@@ -110,7 +109,7 @@ export default function Chessboard() {
     }
     
     let board = [];
-    for (let j = verticalIndex.length - 1; j >= 0; j--){
+    for (let j = 0; j < verticalIndex.length; j++){
         for (let i = 0; i < horizontalIndex.length; i++){
             const number = j + i + 2
             const position = [ i , j ]
