@@ -36,57 +36,18 @@ export default function Chessboard() {
         console.log('hello');
         const chessboard = chessboardRef.current
         const element = e.target 
-        console.log(element);
         // offset est une valeur stable 
-        if (e.target.className === 'piece') {
-            const grabX = Math.floor(e.target.offsetLeft / 100)
-            const grabY = Math.floor(e.target.offsetTop / 100)
+        console.log(Math.floor(element.offsetLeft / 100), Math.floor(element.offsetTop / 100));
+        if (e.target.className === 'piece' && chessboard) {
+            const grabX = Math.floor(element.offsetLeft / 100)
+            const grabY = Math.floor(element.offsetTop / 100)
+            console.log(grabX, grabY);
             setX(grabX)
             setY(grabY)
-            //const x = (e.target.offsetLeft / 100);
-            //const y = (e.target.offsetTop / 100);
-            //element.style.position = 'absolute'
-            //element.style.left = `${x}px`
-            //element.style.top = `${y}px`
             setActivePiece(element)
             setClick(false)
         }
     }
-    
-    /* function movePiece(e) {
-        const chessboard = chessboardRef.current
-        if (activePiece && chessboard) {
-            const minX = chessboard.offsetLeft - 25;
-            const minY = chessboard.offsetTop - 25;
-            const maxX = chessboard.offsetLeft + chessboard.clientWidth - 75;
-            const maxY = chessboard.offsetTop + chessboard.clientHeight - 75;
-            const x = e.clientX - 50;
-            const y = e.clientY - 50;
-            activePiece.style.position = 'absolute'
-            /* activePiece.style.left = `${x}px`
-            activePiece.style.top = `${y}px` */
-            /* if ( x < minX) {
-                activePiece.style.left = `${minX}px`
-            } else {
-                activePiece.style.left = `${x}px`
-            } 
-            if ( x < minX ) {
-                activePiece.style.left = `${minX}px` 
-            } else if ( x > maxX ) {
-                activePiece.style.left = `${maxX}px`
-            } else {
-                activePiece.style.left = `${x}px`
-            }
-            
-            if ( y < minY ) {
-                activePiece.style.top = `${minY}px` 
-            } else if ( y > maxY ) {
-                activePiece.style.top = `${maxY}px`
-            } else {
-                activePiece.style.top = `${y}px`
-            }
-        }
-    } */
     
     function dropPiece(e) {
         console.log('drop it');
