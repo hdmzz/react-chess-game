@@ -6,7 +6,6 @@ import Referee from '../referee/referee';
 const referee = new Referee()
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"];
-
 const pieceType = {
     PAWN: 1,
     ROOK: 2,
@@ -47,6 +46,7 @@ export default function Chessboard() {
     const [gridX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [gridY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
+    const [team, setTeam] = useState()
     const chessboardRef = useRef(null);
 
     function grabPiece(e){
