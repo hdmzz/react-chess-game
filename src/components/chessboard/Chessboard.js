@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
@@ -46,13 +46,14 @@ export default function Chessboard() {
     const [gridX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [gridY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
-    const [team, setTeam] = useState()
+    const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
 
     function grabPiece(e){
         console.log('hello');
         const chessboard = chessboardRef.current
         const element = e.target 
+        console.log(element);
         // offset est une valeur stable 
         console.log(Math.floor(element.offsetLeft / 100), Math.floor(element.offsetTop / 100));
         if (e.target.className === 'piece' && chessboard) {
@@ -64,7 +65,7 @@ export default function Chessboard() {
             setClick(false)
         }
     }
-    
+
     function dropPiece(e) {
         console.log('drop it');
         const chessboard = chessboardRef.current;
@@ -74,8 +75,8 @@ export default function Chessboard() {
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
             const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
-            const isValid = referee.isValid(gridX, gridY, x, y, piece.type, piece.team)
-            console.log(isValid);
+            const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team)
+            //console.log(isValid);
             if (isValid) {
                 const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
                 const newPositionPiece = {...piece, x: x, y: y}
@@ -84,6 +85,7 @@ export default function Chessboard() {
                 setPieces(newPieces)
                 //on doit remplacer l'ancienne piece et les anciennes coordonnées par les nouvelles 
                 //grace a l'index on peut utiliser le splice et remplacer lancienne piece positionnée par la nouvelle position
+                setTeam(!piece.team)
                 setActivePiece(null)
                 setClick(true)
             } else if (!isValid) {
