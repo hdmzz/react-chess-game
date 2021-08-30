@@ -1,7 +1,7 @@
 import { pieceType,  } from "../chessboard/Chessboard";
 
 export default class Referee {
-    tileIsOccupied (x, y, chessboard) {
+    tileIsOccupied(x, y, chessboard) {
         const piece = chessboard.find( p => (p.x === x && p.y === y))
         if (piece) {
             console.log(piece);
@@ -15,7 +15,6 @@ export default class Referee {
 
     isValid(px, py, x, y, piece, team, chessboard){
         if (piece === pieceType.PAWN) {
-//--------------------------------------------------Blanc-------------------------------------------------
             if (team === true) {
                 if (py === 1){
                     if (px === x && y - py === 1){ //le pion ne peut pas reculer
@@ -35,7 +34,6 @@ export default class Referee {
                         }
                     } 
                 }
-                //black
             } else if (team === false) {
                 if (py === 6) {
                     if (px === x && py - y === 1) { //le pion ne peut pas reculer
@@ -57,6 +55,6 @@ export default class Referee {
                 }
             }
         }
-        return false//return false par default bloque les autres deplacements pour le moments?????
+        return false
     }
 }
