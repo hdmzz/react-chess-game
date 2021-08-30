@@ -75,7 +75,7 @@ export default function Chessboard() {
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
             const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
-            const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team)
+            const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team, pieces)
             //console.log(isValid);
             if (isValid) {
                 const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 

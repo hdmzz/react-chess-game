@@ -1,13 +1,21 @@
-import { teamTurn } from "../chessboard/Chessboard";
-import { pieceType } from "../chessboard/Chessboard";
+import { pieceType,  } from "../chessboard/Chessboard";
 
 export default class Referee {
-    isValid(px, py, x, y, piece, team){
+    tileIsOccupied (x, y, chessboard) {
+        const piece = chessboard.find( p => p.x === x && p.y === y)
+        if (piece) {
+            return true 
+        } else {
+            return false
+        }
+    }
+
+    isValid(px, py, x, y, piece, team, chessboard){
         if (piece === pieceType.PAWN) {
-            console.log(team);
             if (team) {
                 if (py === 1){
                     if (px === x && (y - py === 1 || y - py === 2)){ //le pion ne peut pas reculer
+                        this.tileIsOccupied(x, y, chessboard)
                         return true
                     }
                 } else {
