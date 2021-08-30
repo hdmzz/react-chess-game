@@ -1,9 +1,9 @@
 import { teamTurn } from "../chessboard/Chessboard";
-
+import { pieceType } from "../chessboard/Chessboard";
 
 export default class Referee {
-    isValid(px, py, x, y, pieceType, team){
-        if (pieceType === 1){
+    isValid(px, py, x, y, piece, team){
+        if (piece === pieceType.PAWN) {
             console.log(team);
             if (team) {
                 if (py === 1){
@@ -27,6 +27,9 @@ export default class Referee {
                 }
             }
         }
+        if (piece === pieceType.ROOK) {
+            console.log(pieceType.ROOK);
+        }//tour
         return false//return false par default bloque les autres deplacements
     }
 }
