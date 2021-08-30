@@ -18,8 +18,13 @@ export default class Referee {
 //--------------------------------------------------Blanc-------------------------------------------------
             if (team === true) {
                 if (py === 1){
-                    if (px === x && (y - py === 1 || y - py === 2)){ //le pion ne peut pas reculer
+                    if (px === x && y - py === 1){ //le pion ne peut pas reculer
                         if (!this.tileIsOccupied(x, y, chessboard)) {
+                            return true
+                        }
+                    }
+                    if (px === x && y - py === 2) {
+                        if (!this.tileIsOccupied(x, y, chessboard) && !this.tileIsOccupied(x, y-1, chessboard)){
                             return true
                         }
                     }
@@ -33,16 +38,25 @@ export default class Referee {
                 //black
             } else if (team === false) {
                 if (py === 6) {
-                    if (px === x && (py - y === 1 || py - y === 2)) { //le pion ne peut pas reculer
-                        return true
+                    if (px === x && py - y === 1) { //le pion ne peut pas reculer
+                        if (!this.tileIsOccupied(x, y, chessboard)) {
+                            return true
+                        }
+                    }
+                    if (px === x && py - y === 2) {
+                        if (!this.tileIsOccupied(x, y, chessboard) && !this.tileIsOccupied(x, y+1, chessboard)) {
+                            return true
+                        }
                     }
                 } else {
                     if (px === x && py - y === 1) {
-                        return true
+                        if (!this.tileIsOccupied(x, y, chessboard)) {
+                            return true
+                        }
                     }
                 }
             }
         }
-        return false//return false par default bloque les autres deplacements
+        return false//return false par default bloque les autres deplacements pour le moments?????
     }
 }
