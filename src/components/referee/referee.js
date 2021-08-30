@@ -18,7 +18,7 @@ export default class Referee {
 //--------------------------------------------------Blanc-------------------------------------------------
             if (team === true) {
                 if (py === 1){
-                    if (px === x && y - py === 1 || y - py === 2){ //le pion ne peut pas reculer
+                    if (px === x && (y - py === 1 || y - py === 2)){ //le pion ne peut pas reculer
                         if (!this.tileIsOccupied(x, y, chessboard)) {
                             return true
                         }
@@ -33,7 +33,7 @@ export default class Referee {
                 //black
             } else if (team === false) {
                 if (py === 6) {
-                    if (px === x && py - y === 1 || py - y === 2) { //le pion ne peut pas reculer
+                    if (px === x && (py - y === 1 || py - y === 2)) { //le pion ne peut pas reculer
                         return true
                     }
                 } else {
