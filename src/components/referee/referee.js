@@ -2,30 +2,38 @@ import { pieceType,  } from "../chessboard/Chessboard";
 
 export default class Referee {
     tileIsOccupied (x, y, chessboard) {
-        const piece = chessboard.find( p => p.x === x && p.y === y)
+        const piece = chessboard.find( p => (p.x === x && p.y === y))
         if (piece) {
+            console.log(piece);
+            console.log('occupée');
             return true 
         } else {
+            console.log('libre');
             return false
         }
     }
 
     isValid(px, py, x, y, piece, team, chessboard){
         if (piece === pieceType.PAWN) {
-            if (team) {
+//--------------------------------------------------Blanc-------------------------------------------------
+            if (team === true) {
                 if (py === 1){
-                    if (px === x && (y - py === 1 || y - py === 2)){ //le pion ne peut pas reculer
-                        this.tileIsOccupied(x, y, chessboard)
-                        return true
+                    if (px === x && y - py === 1 || y - py === 2){ //le pion ne peut pas reculer
+                        if (!this.tileIsOccupied(x, y, chessboard)) {
+                            return true
+                        }
                     }
                 } else {
                     if (px === x && y - py === 1){
-                        return true
+                        if (!this.tileIsOccupied(x, y, chessboard)) {
+                            return true
+                        }
                     } 
                 }
-            } else if (!team) {
+                //black
+            } else if (team === false) {
                 if (py === 6) {
-                    if (px === x && (py - y === 1 || py - y === 2)){ //le pion ne peut pas reculer
+                    if (px === x && py - y === 1 || py - y === 2) { //le pion ne peut pas reculer
                         return true
                     }
                 } else {
@@ -35,9 +43,6 @@ export default class Referee {
                 }
             }
         }
-        if (piece === pieceType.ROOK) {
-            console.log(pieceType.ROOK);
-        }//tour
         return false//return false par default bloque les autres deplacements
     }
 }

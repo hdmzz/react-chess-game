@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
@@ -16,8 +16,8 @@ export const pieceType = {
 }
 
 export const teamTurn = {
-    WHITE: 1,
-    BLACK: 0
+    WHITE: true,
+    BLACK: false
 }
 
 const initialeBoardState = [];
@@ -50,13 +50,9 @@ export default function Chessboard() {
     const chessboardRef = useRef(null);
 
     function grabPiece(e){
-        console.log('hello');
         const chessboard = chessboardRef.current
         const element = e.target 
-        console.log(element);
-        // offset est une valeur stable 
-        console.log(Math.floor(element.offsetLeft / 100), Math.floor(element.offsetTop / 100));
-        if (e.target.className === 'piece' && chessboard) {
+        if ((e.target.className === 'piece') && chessboard) {
             const grabX = Math.floor(element.offsetLeft / 100)
             const grabY = Math.floor(element.offsetTop / 100)
             setX(grabX)
@@ -67,7 +63,6 @@ export default function Chessboard() {
     }
 
     function dropPiece(e) {
-        console.log('drop it');
         const chessboard = chessboardRef.current;
         if (activePiece && chessboard){
             //NOUVELLES COORDONN2ES
@@ -76,7 +71,7 @@ export default function Chessboard() {
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
             const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
             const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team, pieces)
-            //console.log(isValid);
+            console.log(x, y);
             if (isValid) {
                 const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
                 const newPositionPiece = {...piece, x: x, y: y}
@@ -93,7 +88,6 @@ export default function Chessboard() {
                 setY(0)
                 setClick(true)
             }
-
         }
     }
     
