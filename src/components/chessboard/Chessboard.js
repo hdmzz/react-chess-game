@@ -7,7 +7,7 @@ const referee = new Referee()
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"];
 export const pieceType = {
-    PAWN: 1,
+    PAWN: 1,//pion
     ROOK: 2,//tour
     KNIGHT: 3,
     BISHOP: 4,
