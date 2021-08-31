@@ -55,10 +55,15 @@ export default function Chessboard() {
         if ((e.target.className === 'piece') && chessboard) {
             const grabX = Math.floor(element.offsetLeft / 100)
             const grabY = Math.floor(element.offsetTop / 100)
-            setX(grabX)
-            setY(grabY)
-            setActivePiece(element)
-            setClick(false)
+            const piece = pieces.find(p => p.x === grabX && p.y === grabY)
+            if (piece.team !== team) {
+                return 
+            } else {
+                setX(grabX)
+                setY(grabY)
+                setActivePiece(element)
+                setClick(false)
+            }
         }
     }
 
