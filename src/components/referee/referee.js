@@ -22,6 +22,12 @@ export default class Referee {
                 if (!this.tileIsOccupied(x, y, chessboard)) {
                     return true
                 }
+            } 
+            //ATTACKING PAWN
+            else if (x - px === -1 && y - py === pawnDirection) {
+                console.log('attack left');
+            } else if (x - px === 1 && y - py === pawnDirection) {
+                console.log('attack right');
             }
         }
         return false
