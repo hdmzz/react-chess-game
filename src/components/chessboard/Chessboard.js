@@ -76,15 +76,12 @@ export default function Chessboard() {
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
             const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
             const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team, pieces)
-            console.log(x, y);
             if (isValid) {
                 const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
                 const newPositionPiece = {...piece, x: x, y: y}
                 const newPieces = pieces
                 newPieces.splice(index, 1, newPositionPiece)            
                 setPieces(newPieces)
-                //on doit remplacer l'ancienne piece et les anciennes coordonnées par les nouvelles 
-                //grace a l'index on peut utiliser le splice et remplacer lancienne piece positionnée par la nouvelle position
                 setTeam(!piece.team)
                 setActivePiece(null)
                 setClick(true)

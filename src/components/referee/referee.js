@@ -10,10 +10,21 @@ export default class Referee {
         }
     }
 
+    tileIsOccupiedByOpponent(x, y , chessboard, team) {
+        const piece = chessboard.find(p => (p.x === x && p.y === y && p.team !== team))
+        if (piece) {
+            console.log(piece);
+            return true
+        } else {
+            return false
+        } 
+    }
+
     isValid(px, py, x, y, piece, team, chessboard){
         if (piece === pieceType.PAWN) {
-            const row = (team === true) ? 1 : 6;//si team true ===> white alors axe x = a 1 sinon egal a 6
+            const row = (team === true) ? 1 : 6;//si team true ===> white alors axe x = 1 sinon egal a 6
             const pawnDirection = (team === true) ? 1 : -1;
+            const xDirection = x - px;
             if (px === x && py === row && y - py === 2*pawnDirection) {
                 if (!this.tileIsOccupied(x, y, chessboard) && !this.tileIsOccupied(x, y-pawnDirection, chessboard)){
                     return true
@@ -24,10 +35,10 @@ export default class Referee {
                 }
             } 
             //ATTACKING PAWN
-            else if (x - px === -1 && y - py === pawnDirection) {
-                console.log('attack left');
-            } else if (x - px === 1 && y - py === pawnDirection) {
-                console.log('attack right');
+            else if (x - px === xDirection && y - py === pawnDirection) {
+                if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
+                    
+                }
             }
         }
         return false
