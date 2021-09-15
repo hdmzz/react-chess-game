@@ -43,8 +43,8 @@ for (let p = 0; p < 2; p++) {
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
     const [pieces, setPieces] = useState(initialeBoardState);
-    const [gridX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
-    const [gridY, setY] = useState(0);
+    const [grabX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
+    const [grabY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
@@ -56,6 +56,9 @@ export default function Chessboard() {
             const grabX = Math.floor(element.offsetLeft / 100)
             const grabY = Math.floor(element.offsetTop / 100)
             const piece = pieces.find(p => p.x === grabX && p.y === grabY)
+            console.log(piece);
+        
+            //Gestion du tour 
             if (piece.team !== team) {
                 return 
             } else {
@@ -74,22 +77,60 @@ export default function Chessboard() {
             const x = Math.floor(e.target.offsetLeft / 100) ;//on a des coordonnées de position
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
-            const piece = pieces.find(p => (p.x === gridX && p.y === gridY))
-            const isValid = referee.isValid(gridX, gridY, x, y, piece.type, team, pieces)
-            if (isValid) {
-                const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY)) 
-                const newPositionPiece = {...piece, x: x, y: y}
+            const currentPiece = pieces.find(p => (p.x === grabX && p.y === grabY))//La piece que l'on bouge
+            const attackedPiece = pieces.find(p => (p.x === x && p.y === y))//La piece sur laquelle on lache la currentPiece doit partir
+            console.log(attackedPiece);
+            if (currentPiece) {
+                const isValid = referee.isValid(grabX, grabY, x, y, currentPiece.type, team, pieces)
+                if (isValid) {
+                    const newPieces = pieces
+                    if (attackedPiece) {
+                        console.log(newPieces.indexOf(attackedPiece));
+                        newPieces.splice(newPieces.indexOf(attackedPiece), 1)
+                    }
+                    const newPositionPiece = {...currentPiece, x: x, y: y}
+                    const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
+                        newPieces.splice(index, 1, newPositionPiece)
+                        setPieces(newPieces)
+                        setTeam(!currentPiece.team)
+                        setActivePiece(null)
+                        setClick(true)
+
+
+
+                    /*  const updatedPieces = pieces.reduce((results, piece, index) => {
+                        if (piece.x === grabX && piece.y === grabY) {
+                            if (indexOfAttackedPiece !== -1) {
+                                results.splice(indexOfAttackedPiece, 1, piece)
+                            } else {
+                            piece.x = x
+                            piece.y = y
+                            console.log(piece.team);
+                            results.push(piece)
+                            setTeam(!currentPiece.team)
+                            setActivePiece(null)
+                            setClick(true)
+                            }
+                        } else if (!(piece.x === grabX && piece.y === grabY)) {
+                            results.push(piece)
+                        }
+                        return results
+                    }, [])
+                    setPieces(updatedPieces) */
+                } else if (!isValid) {
+                        setX(0)
+                        setY(0)
+                        setClick(true)
+                }
+            }
+            /* if (isValid) {
+                //on trouve l'indx de la piece qui nous interesse e on splice pas besoin de savoir la team ou l'autre cest ok
+                const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY))
+                const newPositionPiece = {...currentPiece, x: x, y: y}
                 const newPieces = pieces
                 newPieces.splice(index, 1, newPositionPiece)            
                 setPieces(newPieces)
-                setTeam(!piece.team)
-                setActivePiece(null)
-                setClick(true)
-            } else if (!isValid) {
-                setX(0)
-                setY(0)
-                setClick(true)
-            }
+            } */
         }
     }
     

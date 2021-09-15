@@ -13,7 +13,6 @@ export default class Referee {
     tileIsOccupiedByOpponent(x, y , chessboard, team) {
         const piece = chessboard.find(p => (p.x === x && p.y === y && p.team !== team))
         if (piece) {
-            console.log(piece);
             return true
         } else {
             return false
@@ -37,7 +36,7 @@ export default class Referee {
             //ATTACKING PAWN
             else if (x - px === xDirection && y - py === pawnDirection) {
                 if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
-                    
+                    return true
                 }
             }
         }
