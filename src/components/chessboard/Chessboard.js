@@ -32,7 +32,8 @@ for (let p = 0; p < 2; p++) {
     const y = (p === 0) ? 7 : 0
     initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 0, y: y, type: pieceType.ROOK, team: team })
     initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 7, y: y, type: pieceType.ROOK, team: team })
-    initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 1, y: y, type: pieceType.KNIGHT, team: team })
+    initialeBoardState.push({ image: `../../images/knight_w.png`, x: 3, y: 4, type: pieceType.KNIGHT, team: true })
+    initialeBoardState.push({ image: `../../images/knight_b.png`, x: 3, y: y, type: pieceType.KNIGHT, team: false })
     initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 6, y: y, type: pieceType.KNIGHT, team: team })
     initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 2, y: y, type: pieceType.BISHOP, team: team })
     initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 5, y: y, type: pieceType.BISHOP, team: team })
@@ -86,8 +87,9 @@ export default function Chessboard() {
                     const newPieces = pieces
                     if (attackedPiece) {
                         console.log(newPieces.indexOf(attackedPiece));
-                        newPieces.splice(newPieces.indexOf(attackedPiece), 1)
+                        newPieces.splice(newPieces.indexOf(attackedPiece), 1)//l'element attaqué est remplacé supprimé de l'array
                     }
+                    //les nouvelles coordonnees du pion 
                     const newPositionPiece = {...currentPiece, x: x, y: y}
                     const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
                         newPieces.splice(index, 1, newPositionPiece)

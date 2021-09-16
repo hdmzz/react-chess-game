@@ -1,4 +1,4 @@
-import { pieceType,  } from "../chessboard/Chessboard";
+import { pieceType } from "../chessboard/Chessboard";
 
 export default class Referee {
     tileIsOccupied(x, y, chessboard) {
@@ -19,8 +19,8 @@ export default class Referee {
         } 
     }
 
-    isValid(px, py, x, y, piece, team, chessboard){
-        if (piece === pieceType.PAWN) {
+    isValid(px, py, x, y, Type, team, chessboard){
+        if (Type === pieceType.PAWN) {
             const row = (team === true) ? 1 : 6;//si team true ===> white alors axe x = 1 sinon egal a 6
             const pawnDirection = (team === true) ? 1 : -1;
             const xDirection = x - px;
@@ -37,6 +37,43 @@ export default class Referee {
             else if (x - px === xDirection && y - py === pawnDirection) {
                 if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
                     return true
+                }
+            }
+        } else if (Type === pieceType.KNIGHT) {
+            //deplacement haut gauche /droite
+            if (py - y === 2) {
+                if (px - x === 1) {
+                    console.log('deplacement haut gauche');
+                }
+                if (px - x === -1) {
+                    console.log('deplacement haut droite');
+                }
+            }
+            //deplacement droite haut/bas
+            if (px - x === -2) {
+                if (py - y === 1) {
+                    console.log('deplacemnt droite haut');
+                }
+                if (py - y === -1) {
+                    console.log('deplacement droite bas');
+                }
+            }
+            //deplacemtn bas gauche/droite
+            if (py - y === -2) {
+                if (px - x === -1){
+                    console.log('depalcemnt bas droite');
+                }
+                if ( px - x === 1) {
+                    console.log('deplacement bas gauche');
+                }
+            }
+            //deplacement gauche haut/bas 
+            if (px - x === 2) {
+                if (py - y === -1) {
+                    console.log('dplcmt gauche bas');
+                }
+                if (py - y === 1) {
+                    console.log('dplcmt gauche haut');
                 }
             }
         }
