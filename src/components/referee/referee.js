@@ -39,41 +39,20 @@ export default class Referee {
                     return true
                 }
             }
+            //logic deplacement KNIGHT
         } else if (Type === pieceType.KNIGHT) {
-            //deplacement haut gauche /droite
-            if (py - y === 2) {
-                if (px - x === 1) {
-                    console.log('deplacement haut gauche');
-                }
-                if (px - x === -1) {
-                    console.log('deplacement haut droite');
-                }
-            }
-            //deplacement droite haut/bas
-            if (px - x === -2) {
-                if (py - y === 1) {
-                    console.log('deplacemnt droite haut');
-                }
-                if (py - y === -1) {
-                    console.log('deplacement droite bas');
-                }
-            }
-            //deplacemtn bas gauche/droite
-            if (py - y === -2) {
-                if (px - x === -1){
-                    console.log('depalcemnt bas droite');
-                }
-                if ( px - x === 1) {
-                    console.log('deplacement bas gauche');
-                }
-            }
-            //deplacement gauche haut/bas 
-            if (px - x === 2) {
-                if (py - y === -1) {
-                    console.log('dplcmt gauche bas');
-                }
-                if (py - y === 1) {
-                    console.log('dplcmt gauche haut');
+            for (let i = -1; i < 2; i += 2) {
+                for (let j = -1; j <  2; j += 2) {
+                    if (py - y === 2 * i) {// equivalent a  if (py - y === 2 * -1 || 2 * 1) 
+                        if ( px - x === j) {
+                            console.log('deplacement haut/bas droite /gauche');
+                        }
+                    }
+                    if (px - x === 2 * i) {//equivalent a  if (px - x === 2 * -1 || 2 * 1)
+                        if (py - y === j) {
+                            console.log('dplcmt droite/gauche bas/haut');
+                        }
+                    }
                 }
             }
         }
