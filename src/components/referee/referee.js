@@ -15,7 +15,6 @@ export default class Referee {
         const piece = chessboard.find(p => (p.x === x && p.y === y && p.team !== team))
         if (piece) {
             console.log('occupied by opponent');
-
             return true
         } else {
             return false
@@ -38,7 +37,7 @@ export default class Referee {
                 }
             } 
             //ATTACKING PAWN
-            //Lattaquese fait en diagonale avec un pion
+            //Lattaque se fait en diagonale avec un pion
             else if (x - px === xDirection && y - py === pawnDirection) {
                 if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
                     return true
@@ -54,12 +53,18 @@ export default class Referee {
                                 console.log('dplcemtn haut/bas droite/gauche');
                                 return true
                             }
+                            if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
+                                return true
+                            }
                         }
                     }
                     if (px - x === 2 * i) {//equivalent a  if (px - x === 2 * -1 || 2 * 1)
                         if (py - y === j) {
                             if (!this.tileIsOccupied(x, y, chessboard)) {
                                 console.log('dplcmt droite/gauche bas/haut');
+                                return true
+                            }
+                            if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
                                 return true
                             }
                         }
