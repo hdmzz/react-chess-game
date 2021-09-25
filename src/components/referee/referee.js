@@ -76,19 +76,31 @@ export default class Referee {
             console.log('Bishop');
             //movement illegal si coordo 
             for (let i = 1; i < 8; i++) {
+                //mouvement haut droite
+                if (x > px && y < py) {
+                    let possiblePosition = {x: px + i, y: py - i};
+                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                        console.log("illegal move");
+                        break
+                    }
+                }
                 if (x - px === i && y - py === -i) {
                     console.log(`deplacement haut droite de ${i} cases`);
-                    //on attend d'avoir une correspondance avec le i donc on break pour arrteer la boucle
-                    break
+                }
+                // mouvement haut gauche 
+                if (x < px && y < py) {
+                    
                 }
                 if (x - px === -i && y - py === -i) {
                     console.log(`deplacment haut gauche de ${i} cases`);
                     break
                 }
+                //mouvement bas droite
                 if (x - px === i && y - py === i) {
                     console.log(`deplacment bas droite de ${i} cases`);
                     break
                 }
+                //mouvement bas gauche
                 if (x - px === -i && y - py === i) {
                     console.log(`deplacment bas gauche de ${i} cases`);
                     break
