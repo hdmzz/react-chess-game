@@ -74,6 +74,7 @@ export default class Referee {
             }
         } else if (type === pieceType.BISHOP) {
             console.log('Bishop');
+            //movement illegal si coordo 
             for (let i = 1; i < 8; i++) {
                 if (x - px === i && y - py === -i) {
                     console.log(`deplacement haut droite de ${i} cases`);
