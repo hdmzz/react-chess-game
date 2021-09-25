@@ -22,7 +22,7 @@ export const teamTurn = {
 
 const initialeBoardState = [];
 for (let i = 0; i < 8; i++){
-    initialeBoardState.push({ image: "../../images/pawn_b.png", x: i, y: 6, type: pieceType.PAWN, team: teamTurn.BLACK })
+    initialeBoardState.push({ image: "../../images/pawn_b.png", x: i, y: 6, type: pieceType.PAWN, team: teamTurn.BLACK })//x-------  y|||||||
     initialeBoardState.push({ image: "../../images/pawn_w.png", x: i, y: 1, type: pieceType.PAWN, team: teamTurn.WHITE })
 }
 

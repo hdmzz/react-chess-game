@@ -64,15 +64,60 @@ export default class Referee {
                                 console.log('dplcmt droite/gauche bas/haut');
                                 return true
                             }
+                            //ici logique attaque 
                             if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)) {
                                 return true
                             }
                         }
-                    }
-                    //ici logique attaque 
-                    
+                    } 
                 }
             }
+        } else if (type === pieceType.BISHOP) {
+            console.log('Bishop');
+            for (let i = 1; i < 8; i++) {
+                if (x - px === i && y - py === -i) {
+                    console.log(`deplacement haut droite de ${i} cases`);
+                    //on attend d'avoir une correspondance avec le i donc on break pour arrteer la boucle
+                    break
+                }
+                if (x - px === -i && y - py === -i) {
+                    console.log(`deplacment haut gauche de ${i} cases`);
+                    break
+                }
+                if (x - px === i && y - py === i) {
+                    console.log(`deplacment bas droite de ${i} cases`);
+                    break
+                }
+                if (x - px === -i && y - py === i) {
+                    console.log(`deplacment bas gauche de ${i} cases`);
+                    break
+                }
+                console.log(i); 
+            }
+            //4 pattern de deplacemnt 
+            /* const possiblePosition = [];
+            let i = px
+            let j = py
+            while (x < 7) {
+                i++
+                j--
+                const newPossibleDeplacement = {
+                    px,
+                    py
+                }
+                possiblePosition.push(newPossibleDeplacement)
+            }
+            while (px > 0) {
+                console.log(px, py);
+                px--
+                py--
+                const newPossible = {
+                    px,
+                    py
+                }
+                console.log(newPossible);
+            }
+            console.log(possiblePosition); */
         }
         return false
     }
