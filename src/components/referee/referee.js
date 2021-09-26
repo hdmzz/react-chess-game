@@ -83,9 +83,9 @@ export default class Referee {
                         console.log("illegal move");
                         break
                     }
-                }
-                if (x - px === i && y - py === -i) {
-                    return true
+                    if (x - px === i && y - py === -i) {
+                        return true
+                    }
                 }
                 // mouvement haut gauche 
                 if (x < px && y < py) {
@@ -95,9 +95,9 @@ export default class Referee {
                         console.log("illegal move");
                         break
                     }
-                }
-                if (x - px === -i && y - py === -i) {
-                    return true
+                    if (x - px === -i && y - py === -i) {
+                        return true
+                    }
                 }
                 //mouvement bas droite
                 if (x > px && y > py) {
@@ -106,9 +106,9 @@ export default class Referee {
                         console.log("illegal move");
                         break
                     }
-                }
-                if (x - px === i && y - py === i) {
-                    return true
+                    if (x - px === i && y - py === i) {
+                        return true
+                    }
                 }
                 //mouvement bas gauche
                 if (x < px && y > py) {
@@ -117,9 +117,9 @@ export default class Referee {
                         console.log("illegal move");
                         break
                     }
-                }
-                if (x - px === -i && y - py === i) {
-                    return true
+                    if (x - px === -i && y - py === i) {
+                        return true
+                    }
                 }
             }
             //4 pattern de deplacemnt 
