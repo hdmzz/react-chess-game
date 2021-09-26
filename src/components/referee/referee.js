@@ -80,8 +80,12 @@ export default class Referee {
                 if (x > px && y < py) {
                     let possiblePosition = {x: px + i, y: py - i};
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
-                        console.log("illegal move");
-                        break
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            console.log('attacking oppenent'); 
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
                     }
                     if (x - px === i && y - py === -i) {
                         return true
@@ -90,10 +94,13 @@ export default class Referee {
                 // mouvement haut gauche 
                 if (x < px && y < py) {
                     let possiblePosition = {x: px - i, y: py - i};
-                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
-                        console.log("illegal move");
-                        break
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            console.log('attacking oppenent'); 
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
                     }
                     if (x - px === -i && y - py === -i) {
                         return true
@@ -103,8 +110,12 @@ export default class Referee {
                 if (x > px && y > py) {
                     let possiblePosition = {x: px + i, y: py + i};
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
-                        console.log("illegal move");
-                        break
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            console.log('attacking oppenent'); 
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
                     }
                     if (x - px === i && y - py === i) {
                         return true
@@ -114,8 +125,12 @@ export default class Referee {
                 if (x < px && y > py) {
                     let possiblePosition = {x: px - i, y: py + i};
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
-                        console.log("illegal move");
-                        break
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            console.log('attacking oppenent'); 
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
                     }
                     if (x - px === -i && y - py === i) {
                         return true
