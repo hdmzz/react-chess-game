@@ -72,95 +72,106 @@ export default class Referee {
                     } 
                 }
             }
+            //LOgique DEPLACEMTN BISHOP
         } else if (type === pieceType.BISHOP) {
             console.log('Bishop');
-            
             for (let i = 1; i < 8; i++) {
                 //mouvement haut droite
                 if (x > px && y < py) {
                     let possiblePosition = {x: px + i, y: py - i};
+                    if (possiblePosition.x > x && possiblePosition.y < y){
+                        break
+                    }
+                    console.log('possibleposition');
+                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
-                            console.log('attacking oppenent'); 
+                            console.log('attacking oppenent x et y choisi');
+                            console.log(possiblePosition.x, possiblePosition.y);
+                            if(x > possiblePosition.x && y < possiblePosition.y) {
+                                console.log('illegalmove');
+                                break
+                            } else { 
+                                console.log('attacj=king ');
+                            }
+                            
                         } else {
                             console.log("illegal move");
                             break
                         }
-                    }
-                    if (x - px === i && y - py === -i) {
+                    } 
+                    /* if (x - px === i && y - py === -i) {
                         return true
-                    }
+                    } */
                 }
                 // mouvement haut gauche 
                 if (x < px && y < py) {
                     let possiblePosition = {x: px - i, y: py - i};
+                    if (possiblePosition.x < x && possiblePosition.y < y){
+                        break
+                    }
+                    console.log('possibleposition');
+                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
                             console.log('attacking oppenent'); 
+                            console.log(x, y);
                         } else {
                             console.log("illegal move");
                             break
                         }
-                    }
-                    if (x - px === -i && y - py === -i) {
+                    } 
+                    /* if (x - px === -i && y - py === -i) {
                         return true
-                    }
+                    } */
                 }
                 //mouvement bas droite
                 if (x > px && y > py) {
                     let possiblePosition = {x: px + i, y: py + i};
+                    if (possiblePosition.x > x && possiblePosition.y > y){
+                        break
+                    }
+                    console.log('possibleposition');
+                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
-                            console.log('attacking oppenent'); 
+                            console.log('possibleposition');
+                            console.log(possiblePosition);
+                            console.log('attacking oppenent');    
+                            console.log(x, y);
+                            return true 
                         } else {
                             console.log("illegal move");
                             break
                         }
                     }
-                    if (x - px === i && y - py === i) {
+
+                    /* if (x - px === i && y - py === i) {
                         return true
-                    }
+                    } */
                 }
                 //mouvement bas gauche
                 if (x < px && y > py) {
                     let possiblePosition = {x: px - i, y: py + i};
+                    if (possiblePosition.x < x && possiblePosition.y > y){
+                        break
+                    }
+                    console.log('possibleposition');
+                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
                             console.log('attacking oppenent'); 
+                            console.log(x, y);
                         } else {
                             console.log("illegal move");
                             break
                         }
-                    }
-                    if (x - px === -i && y - py === i) {
+                    } 
+                    /* if (x - px === -i && y - py === i) {
                         return true
-                    }
+                    } */
                 }
             }
-            //4 pattern de deplacemnt 
-            /* const possiblePosition = [];
-            let i = px
-            let j = py
-            while (x < 7) {
-                i++
-                j--
-                const newPossibleDeplacement = {
-                    px,
-                    py
-                }
-                possiblePosition.push(newPossibleDeplacement)
-            }
-            while (px > 0) {
-                console.log(px, py);
-                px--
-                py--
-                const newPossible = {
-                    px,
-                    py
-                }
-                console.log(newPossible);
-            }
-            console.log(possiblePosition); */
         }
         return false
     }

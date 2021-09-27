@@ -57,7 +57,6 @@ export default function Chessboard() {
             const grabY = Math.floor(element.offsetTop / 100)
             const piece = pieces.find(p => p.x === grabX && p.y === grabY)
             console.log(piece);
-        
             //Gestion du tour 
             if (piece.team !== team) {
                 return 
