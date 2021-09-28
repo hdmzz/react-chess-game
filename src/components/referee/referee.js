@@ -187,6 +187,18 @@ export default class Referee {
                 }
             }
             return false
+        } else if (type === pieceType.ROOK) {
+            for (let i = 1; i < 8; i++) {
+                for (let j = -1; j < 2; j += 2) {
+                    if (x === px && y === py + (i*j)) {
+                        console.log(`deplacemnt vertical ${i} cases`);
+                    }
+                    if (x === px + (i*j) && y === py) {
+                        console.log(`deplacement horizontal ${i} cases`);
+                    } 
+                    
+                }
+            } 
         }
         return false
     }
