@@ -187,39 +187,79 @@ export default class Referee {
             return false
         } else if (type === pieceType.ROOK) {
             for (let i = 1; i < 8; i++) {
-               //==============================
-                if ( x === px && y > py) {
-                    let possiblePosition = {
-                        x: px,
-                        y: py + i
+               //==============================vertical
+                if (x === px) {
+                    if (y > py) {//bas
+                        let possiblePosition = {
+                            x: px,
+                            y: py + i
+                        }
+                        if (possiblePosition.y > y) break
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            }
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
                     }
-                    if (possiblePosition.y > y) break
-                    console.log(possiblePosition);
-                }
-                if (x === px && y < py) {
-                    let possiblePosition = {
-                        x: px,
-                        y: py - i
+                    if (y < py) {//haut
+                        let possiblePosition = {
+                            x: px,
+                            y: py - i
+                        }
+                        if (possiblePosition.y < y) break
+                        console.log(i);
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            }
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
                     }
-                    if (possiblePosition.y < y) break
-                    console.log(possiblePosition);
                 }
-                if ( y === py ) {
-                    if ( x > px ) {
+                //=========================================horizontal
+                if (y === py) {
+                    if (x > px) {
                         let possiblePosition = {
                             x: px + i,
                             y: py
                         }
                         if (possiblePosition.x > x) break
-                        console.log(possiblePosition);
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            } 
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true 
+                        }
                     }
-                    if ( x < px ) {
+                    if (x < px) {
                         let possiblePosition = {
                             x: px - i,
                             y: py
                         }
                         if (possiblePosition.x < x) break
-                        console.log(possiblePosition);
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            } 
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
                     }
                 }
                 /* if (x === px && y === py + i) {
