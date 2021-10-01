@@ -343,7 +343,112 @@ export default class Referee {
                 } */
             } 
             return false
-        }
+        } else if (type === pieceType.QUEEN) {
+            console.log("QUEEN");
+            //deplacemnt diagonale et horizontal et vertical melange de bishop et de rook mais refactoré
+            //on va voir ce que ca donne 
+            for (let i = 1; i < 8; i++){
+                //mouvement haut droite
+                if (x > px && y < py) {
+                    let possiblePosition = {x: px + i, y: py - i};
+                    if (possiblePosition.x > x && possiblePosition.y < y){
+                        break
+                    }
+                    console.log('possiblposition');
+                    console.log(possiblePosition);
+                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            if(x > possiblePosition.x && y < possiblePosition.y) {
+                                console.log('illegalmove');
+                                return false
+                            } else { 
+                                return true
+                            }
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
+                    } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                        return true
+                    } 
+                }
+                // mouvement haut gauche 
+                if (x < px && y < py) {
+                    let possiblePosition = {x: px - i, y: py - i};
+                    if (possiblePosition.x < x && possiblePosition.y < y){
+                        break
+                    }
+                    console.log('possiblposition');
+                    console.log(possiblePosition);
+                    console.log('desiredposition');
+                    console.log(x, y);
+                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            if(x < possiblePosition.x && y < possiblePosition.y) {
+                                console.log('illegalmove');
+                                return false
+                            } else { 
+                                return true
+                            }
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
+                    } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                        return true
+                    }
+                }
+                 //mouvement bas droite
+                if (x > px && y > py) {
+                    let possiblePosition = {x: px + i, y: py + i};
+                    if (possiblePosition.x > x && possiblePosition.y > y){
+                        break
+                    }
+                    console.log(x, y);
+                    console.log('possiblposition');
+                    console.log(possiblePosition);
+                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            if(x > possiblePosition.x && y > possiblePosition.y) {
+                                console.log('illegalmove');
+                                return false
+                            } else { 
+                                return true
+                            }
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
+                    } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                        return true
+                    }
+                }
+                //mouvement bas gauche
+                if (x < px && y > py) {
+                    let possiblePosition = {x: px - i, y: py + i};
+                    if (possiblePosition.x < x && possiblePosition.y > y){
+                        break
+                    }
+                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                        if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
+                            if(x < possiblePosition.x && y > possiblePosition.y) {
+                                console.log('illegalmove');
+                                return false
+                            } else { 
+                                return true
+                            }
+                        //tile is occupied by team member
+                        } else {
+                            console.log("illegal move");
+                            break
+                        }
+                    } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                        return true
+                    }
+                }
+                return false
+            }
+        }    
         return false
     }
 }
