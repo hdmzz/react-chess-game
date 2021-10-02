@@ -262,85 +262,6 @@ export default class Referee {
                         }
                     }
                 }
-                /* if (x === px && y === py + i) {
-                    let possiblePosition = {
-                        x: px,
-                        y: py + i
-                    }
-                    if (this.tileIsOccupied(possiblePosition.px, possiblePosition.y, chessboard)) {
-                        console.log("occupied");
-                    } else {
-                        console.log(`deplacemnt bas ${i} cases`);
-                    }
-                }
-                if (x === px && y === py - i) {
-                    let possiblePosition = {
-                        x: px,
-                        y: py - i
-                    }
-                    if (this.tileIsOccupied(possiblePosition.px, possiblePosition.y, chessboard)) {
-                        console.log("occupied");
-                    } else {
-                        console.log(`deplacemnt haut ${i} cases`);
-                    }
-                } */
-                /* if (x === px + i && y === py) {
-                    let possiblePosition = {
-                        x: px + i,
-                        y: py
-                    }
-                    console.log(possiblePosition);
-                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.py, chessboard)) {
-                        console.log("occupied");
-                        if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)){
-                            console.log("occupied by opponent");
-                        }
-                    } else {
-                        console.log(`deplacement horizontal ${i} cases`);
-                    }
-                }
-                if (x === px - i && y === py) {
-                    let possiblePosition = {
-                        x: px - i,
-                        y: py
-                    }
-                    console.log(possiblePosition);
-                    if (this.tileIsOccupied(possiblePosition.x, possiblePosition.py, chessboard)) {
-                        console.log("occupied");
-                        if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)){
-                            console.log("occupied by opponent");
-                        }
-                    } else {
-                        console.log(`deplacement horizontal ${i} cases`);
-                    }
-                } */
-               /*  for (let j = -1; j < 2; j += 2) {
-                    //deplacement vertical
-                    let possiblePosition = { px, y: py + (i*j) }
-                    console.log(possiblePosition);
-                    if (possiblePosition.y )
-                    if (x === px && y === py + (i*j)) {
-                        if (this.tileIsOccupied(possiblePosition.px, possiblePosition.y, chessboard)) {
-                            console.log("occupied");
-                        } else {
-                            console.log(`deplacemnt vertical ${i} cases`);
-                        }
-                    }
-                    if (x === px + (i*j) && y === py) {
-                        let possiblePosition = { x: px + (i*j), py}
-                        console.log(possiblePosition);
-
-                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.py, chessboard)) {
-                            console.log("occupied");
-                            if (this.tileIsOccupiedByOpponent(x, y, chessboard, team)){
-                                console.log("occupied by opponent");
-                            }
-                        } else {
-                            console.log(`deplacement horizontal ${i} cases`);
-                        }
-                    } 
-                    
-                } */
             } 
             return false
         } else if (type === pieceType.QUEEN) {
@@ -522,7 +443,9 @@ export default class Referee {
                     }
                 }
             }
-        }    
+        } else if (type === pieceType.KING) {
+            console.log('king');
+        }
         return false
     }
 }
