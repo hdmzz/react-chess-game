@@ -446,7 +446,81 @@ export default class Referee {
                         return true
                     }
                 }
-                return false
+                //mouvement verticale
+                if (x === px) {
+                    if (y > py) {//bas
+                        let possiblePosition = {
+                            x: px,
+                            y: py + i
+                        }
+                        if (possiblePosition.y > y) break
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            }
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
+                    }
+                    if (y < py) {//haut
+                        let possiblePosition = {
+                            x: px,
+                            y: py - i
+                        }
+                        if (possiblePosition.y < y) break
+                        console.log(i);
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            }
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
+                    }
+                }
+                //mouvement horizontal
+                if (y === py) {
+                    if (x > px) {
+                        let possiblePosition = {
+                            x: px + i,
+                            y: py
+                        }
+                        if (possiblePosition.x > x) break
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            } 
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true 
+                        }
+                    }
+                    if (x < px) {
+                        let possiblePosition = {
+                            x: px - i,
+                            y: py
+                        }
+                        if (possiblePosition.x < x) break
+                        if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
+                            console.log('occupied');
+                            if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)) {
+                                return true
+                            } else {
+                                return false 
+                            } 
+                        } else if (possiblePosition.x === x && possiblePosition.y === y) {
+                            return true
+                        }
+                    }
+                }
             }
         }    
         return false
