@@ -72,13 +72,10 @@ export default class Referee {
                     } 
                 }
             }
-        
-        
             //LOgique DEPLACEMTN BISHOP
         } else if (type === pieceType.BISHOP) {
             console.log('Bishop');
             for (let i = 1; i < 8 ; i += 1) {
-                console.log(i);
                 //mouvement haut droite
                 if (x > px && y < py) {
                     let possiblePosition = {x: px + i, y: py - i};

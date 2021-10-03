@@ -2,8 +2,11 @@ import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
+import Determination from '../../middleware/determination';
+import { possibleDeplacement } from '../../middleware/determination';
 
 const referee = new Referee()
+const determination = new Determination()
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"];
 export const pieceType = {
@@ -48,7 +51,9 @@ export default function Chessboard() {
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
-
+    
+    determination.determinationPosition(pieces)
+    console.log(possibleDeplacement);
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target 
