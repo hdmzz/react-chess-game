@@ -1,5 +1,8 @@
 import { pieceType } from "../components/chessboard/Chessboard";
+import RookDetermination from "./determinationRook";
+const rookDeter =  new RookDetermination();
 export const possibleDeplacement = [];
+
 export default class Determination {
     determinationPosition(chessboard) {
         chessboard.forEach(piece => {
@@ -12,9 +15,10 @@ export default class Determination {
     determinationPawn(piece) {
         console.log('pawn deteminantion');
         let possibleMove = {
+            name: piece.name,
             z: {
-                zx: piece.x,
-                zy: piece.y
+                x0: piece.x,
+                y0: piece.y
             },
             a: {
                 x: piece.x ,
