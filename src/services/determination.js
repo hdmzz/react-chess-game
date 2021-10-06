@@ -9,11 +9,16 @@ export default class Determination {
             if (piece.type === pieceType.PAWN) {
                 this.determinationPawn(piece)
             }
+            if (piece.type === pieceType.ROOK) {
+                rookDeter.determination(piece, chessboard)
+            }
+            if (piece.type === pieceType.KNIGHT) {
+                
+            }
         });
     }
 
     determinationPawn(piece) {
-        console.log('pawn deteminantion');
         let possibleMove = {
             name: piece.name,
             z: {

@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
-import Determination from '../../middleware/determination';
-import { possibleDeplacement } from '../../middleware/determination';
+import Determination from '../../services/determination';
+import { possibleDeplacement } from '../../services/determination';
 
 const referee = new Referee()
 const determination = new Determination()
@@ -53,7 +53,7 @@ export default function Chessboard() {
     const chessboardRef = useRef(null);
     
     determination.determinationPosition(pieces)
-    console.log(possibleDeplacement);
+
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target 
