@@ -82,8 +82,6 @@ export default class Referee {
                     if (possiblePosition.x > x && possiblePosition.y < y){
                         break
                     }
-                    console.log('possiblposition');
-                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
                             if(x > possiblePosition.x && y < possiblePosition.y) {
@@ -108,10 +106,6 @@ export default class Referee {
                     if (possiblePosition.x < x && possiblePosition.y < y){
                         break
                     }
-                    console.log('possiblposition');
-                    console.log(possiblePosition);
-                    console.log('desiredposition');
-                    console.log(x, y);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
                             if(x < possiblePosition.x && y < possiblePosition.y) {

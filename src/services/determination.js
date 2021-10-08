@@ -1,8 +1,10 @@
 import { pieceType } from "../components/chessboard/Chessboard";
 import RookDetermination from "./determinationRook";
 import KnightDetermination from "./determinationKnight";
+import BishopDetermination from "./determinationBishop";
 const rookDeter =  new RookDetermination();
 const knightDeter = new KnightDetermination();
+const bishopDeter = new BishopDetermination();
 
 export default class Determination {
     determinationPosition(chessboard) {
@@ -15,6 +17,9 @@ export default class Determination {
             }
             if (piece.type === pieceType.KNIGHT) {
                 knightDeter.determination(piece)
+            }
+            if (piece.type === pieceType.BISHOP) {
+                bishopDeter.determination(piece)
             }
         });
     }

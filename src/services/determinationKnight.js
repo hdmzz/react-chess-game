@@ -41,7 +41,7 @@ export default class KnightDetermination{
             }
             knight.push(possibleMove)
         }
-//RIGHTUP LEFTBOTTOM ///OOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKK
+        //RIGHTUP LEFTBOTTOM ///OOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKK
         for(let i = -1; i < 2 ; i += 2) {
             let possibleMove = {
                 x: null,
@@ -65,6 +65,5 @@ export default class KnightDetermination{
             }
             knight.push(possibleMove)
         }
-        console.log(knight);
-        }
+    }
 }     
