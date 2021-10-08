@@ -1,18 +1,17 @@
 import Referee from "../components/referee/referee";
 const referee = new Referee();
-const rookPosition = [];
-
+//implementer une fonction qui detremine si la piece bouge sinon pas besoin de tout recalculer 
+//pour une histoire de performance de l'appli
 export default class RookDetermination {
     determination(piece, chessboard) {
-        let Rook = [piece]
-    console.log(piece);
+        const rook = [piece]
         for (let i = 1; i < 8; i++) {
             let possibleMove = {
                 x: piece.x,
                 y: piece.y - i
             }
             if (possibleMove.y < 0) break;
-            Rook.push(possibleMove)
+            rook.push(possibleMove)
         }
         for (let i = 1; i < 8; i++) {
             let possibleMove = {
@@ -20,7 +19,7 @@ export default class RookDetermination {
                 y: piece.y + i
             }
             if (possibleMove.y > 7) break;
-            Rook.push(possibleMove)
+            rook.push(possibleMove)
         }
         for (let i = 1; i < 8; i++) {
             let possibleMove = {
@@ -28,7 +27,7 @@ export default class RookDetermination {
                 y: piece.y
             }
             if (possibleMove.x < 0) break;
-            Rook.push(possibleMove)
+            rook.push(possibleMove)
         }
         for (let i = 1; i < 8; i++) {
             let possibleMove = {
@@ -36,8 +35,8 @@ export default class RookDetermination {
                 y: piece.y
             }
             if (possibleMove.x > 7) break;
-            Rook.push(possibleMove)
+            rook.push(possibleMove)
         }
-        console.log(Rook);
+        //console.log(rook);
     }
 }

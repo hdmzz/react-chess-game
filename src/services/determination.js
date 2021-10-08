@@ -1,7 +1,8 @@
 import { pieceType } from "../components/chessboard/Chessboard";
 import RookDetermination from "./determinationRook";
+import KnightDetermination from "./determinationKnight";
 const rookDeter =  new RookDetermination();
-export const possibleDeplacement = [];
+const knightDeter = new KnightDetermination();
 
 export default class Determination {
     determinationPosition(chessboard) {
@@ -13,12 +14,13 @@ export default class Determination {
                 rookDeter.determination(piece, chessboard)
             }
             if (piece.type === pieceType.KNIGHT) {
-                
+                knightDeter.determination(piece)
             }
         });
     }
 
     determinationPawn(piece) {
+        let pawn = [piece]
         let possibleMove = {
             name: piece.name,
             z: {
@@ -34,6 +36,6 @@ export default class Determination {
                 y: piece.y + ((piece.y === 1) ? 2 : -2)
             }
         }
-        possibleDeplacement.push(possibleMove)
+        pawn.push(possibleMove)
     } 
 }
