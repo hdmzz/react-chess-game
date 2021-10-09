@@ -37,6 +37,6 @@ export default class RookDetermination {
             if (possibleMove.x > 7) break;
             rook.push(possibleMove)
         }
-        //console.log(rook);
+        return rook
     }
 }

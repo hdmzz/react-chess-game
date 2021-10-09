@@ -37,5 +37,6 @@ export default class BishopDetermination {
             }
             bishop.push(possibleMove)
         }
+        return bishop
     }
 }
