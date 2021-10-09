@@ -3,10 +3,12 @@ import RookDetermination from "./determinationRook";
 import KnightDetermination from "./determinationKnight";
 import BishopDetermination from "./determinationBishop";
 import QueenDetermination from "./determinationQueen";
+import KingDetermination from "./determinationKing";
 const rookDeter =  new RookDetermination();
 const knightDeter = new KnightDetermination();
 const bishopDeter = new BishopDetermination();
 const queenDeter = new QueenDetermination();
+const kingDeter = new KingDetermination();
 
 export default class Determination {
     determinationPosition(chessboard) {
@@ -25,6 +27,9 @@ export default class Determination {
             }
             if (piece.type === pieceType.QUEEN) {
                 queenDeter.determination(piece)
+            }
+            if (piece.type === pieceType.KING) {
+                kingDeter.determination(piece)
             }
         });
     }

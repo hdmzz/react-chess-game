@@ -8,6 +8,5 @@ export default class QueenDetermination {
         const verticalAndHorizontalMove = rookDeter.determination(piece)
         const diagonalMove = bishopDetermination.determination(piece)
         queen.push(verticalAndHorizontalMove.concat(diagonalMove))
-        console.log(queen);
     }
 } 

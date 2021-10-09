@@ -3,7 +3,6 @@ import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
 import Determination from '../../services/determination';
-import { possibleDeplacement } from '../../services/determination';
 
 const referee = new Referee()
 const determination = new Determination()
@@ -100,42 +99,12 @@ export default function Chessboard() {
                         setTeam(!currentPiece.team)
                         setActivePiece(null)
                         setClick(true)
-
-
-
-                    /*  const updatedPieces = pieces.reduce((results, piece, index) => {
-                        if (piece.x === grabX && piece.y === grabY) {
-                            if (indexOfAttackedPiece !== -1) {
-                                results.splice(indexOfAttackedPiece, 1, piece)
-                            } else {
-                            piece.x = x
-                            piece.y = y
-                            console.log(piece.team);
-                            results.push(piece)
-                            setTeam(!currentPiece.team)
-                            setActivePiece(null)
-                            setClick(true)
-                            }
-                        } else if (!(piece.x === grabX && piece.y === grabY)) {
-                            results.push(piece)
-                        }
-                        return results
-                    }, [])
-                    setPieces(updatedPieces) */
                 } else if (!isValid) {
                         setX(0)
                         setY(0)
                         setClick(true)
                 }
             }
-            /* if (isValid) {
-                //on trouve l'indx de la piece qui nous interesse e on splice pas besoin de savoir la team ou l'autre cest ok
-                const index = pieces.findIndex(p => (p.x === gridX && p.y === gridY))
-                const newPositionPiece = {...currentPiece, x: x, y: y}
-                const newPieces = pieces
-                newPieces.splice(index, 1, newPositionPiece)            
-                setPieces(newPieces)
-            } */
         }
     }
     
@@ -155,9 +124,7 @@ export default function Chessboard() {
     }
     return (
         <div 
-        //onMouseMove={e => movePiece(e)}
         onClick={firstClick ? (e => grabPiece(e)) : (e => dropPiece(e)) } 
-        //onMouseUp={e => dropPiece(e)}
         id="chessboard"
         ref={chessboardRef}>
             {board}
