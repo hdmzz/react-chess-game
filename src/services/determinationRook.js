@@ -1,11 +1,13 @@
 //import Referee from "../components/referee/referee";
 //const referee = new Referee();
+import Pieces from "../components/pieces/pieces";
 
-//implementer une fonction qui detremine si la piece bouge sinon pas besoin de tout recalculer 
-//pour une histoire de performance de l'appli
-export default class RookDetermination {
+export default class Rook extends Pieces {
+    constructor(image, x, y, type, team, position) {
+        super(image, x, y, type, team, position)
+    }
     determination(piece, n) {
-        const rook = [piece]
+        let rook = []
         if (n === undefined){
             n = 8
         }

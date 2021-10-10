@@ -1,9 +1,14 @@
-export default class BishopDetermination {
+import Pieces from "../components/pieces/pieces"
+
+export default class Bishop extends Pieces {
+    constructor(image, x, y, type, team, position) {
+        super(image, x, y, type, team, position)
+    }
     determination(piece, n) {
         if (n === undefined){
             n = 8
         }
-        const bishop = [piece];
+        const bishop = [];
         for (let i = 1; i < n; i++) {//mouvement haut droite
             if (piece.x + i > 7 || piece.y - i < 0) break;
             let possibleMove =

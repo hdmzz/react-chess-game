@@ -5,9 +5,13 @@ import Referee from '../referee/referee';
 import Determination from '../../services/determination';
 import Pawn from "../../services/determination"
 import Pieces from '../pieces/pieces';
-
+import Rook from '../../services/determinationRook';
+import Knight from '../../services/determinationKnight';
+import Bishop from '../../services/determinationBishop'
+import Queen from '../../services/determinationQueen';
+import King from '../../services/determinationKing';
 const referee = new Referee();
-const determination = new Pawn();
+const determination = new Pieces();
 
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -37,24 +41,41 @@ for (let i = 0; i < 8; i++){
 
 
 
-for (let i = 0; i < 8; i++){
+/* for (let i = 0; i < 8; i++){
     initialeBoardState.push({ image: "../../images/pawn_b.png", x: i, y: 6, type: pieceType.PAWN, team: teamTurn.BLACK, name: "Pawn" })//x-------  y|||||||
     initialeBoardState.push({ image: "../../images/pawn_w.png", x: i, y: 1, type: pieceType.PAWN, team: teamTurn.WHITE, name: "Pawn" })
-}
+} */
 
-/* for (let p = 0; p < 2; p++) {
+for (let p = 0; p < 2; p++) {
     const type = (p === 0) ? "b" : "w"
     const team = (p === 0) ? teamTurn.BLACK : teamTurn.WHITE
     const y = (p === 0) ? 7 : 0
-    initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 0, y: y, type: pieceType.ROOK, team: team, name: "Rook" })
-    initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 7, y: y, type: pieceType.ROOK, team: team, name: "Rook" })
-    initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 1, y: y, type: pieceType.KNIGHT, team: team, name: "Knight" })
-    initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 6, y: y, type: pieceType.KNIGHT, team: team, name: "Knight" })
-    initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 2, y: y, type: pieceType.BISHOP, team: team, name: "Bishop" })
-    initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 5, y: y, type: pieceType.BISHOP, team: team, name: "Bishop" })
-    initialeBoardState.push({ image: `../../images/king_${type}.png`, x: 3, y: y, type: pieceType.KING, team: team, name: "King" })
-    initialeBoardState.push({ image: `../../images/queen_${type}.png`, x: 4, y: y, type: pieceType.QUEEN, team: team, name: "Queen" })
-} */
+    testClass.push(new Rook(`../../images/rook_${type}.png`, 0, y, pieceType.ROOK, team, []))
+    testClass.push(new Rook(`../../images/rook_${type}.png`, 7, y, pieceType.ROOK, team, []))
+    
+    // initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 0, y: y, type: pieceType.ROOK, team: team})
+    // initialeBoardState.push({ image: `../../images/rook_${type}.png`, x: 7, y: y, type: pieceType.ROOK, team: team})
+    testClass.push(new Knight(`../../images/knight_${type}.png`, 1, y, pieceType.KNIGHT, team, []))
+    testClass.push(new Knight(`../../images/knight_${type}.png`, 6, y, pieceType.KNIGHT, team, []))
+
+    // initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 1, y: y, type: pieceType.KNIGHT, team: team, name: "Knight" })
+    // initialeBoardState.push({ image: `../../images/knight_${type}.png`, x: 6, y: y, type: pieceType.KNIGHT, team: team, name: "Knight" })
+    testClass.push(new Bishop(`../../images/bishop_${type}.png`, 2, y, pieceType.BISHOP, team, []))
+    testClass.push(new Bishop(`../../images/bishop_${type}.png`, 5, y, pieceType.BISHOP, team, []))
+
+    // initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 2, y: y, type: pieceType.BISHOP, team: team, name: "Bishop" })
+    // initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 5, y: y, type: pieceType.BISHOP, team: team, name: "Bishop" })
+    testClass.push(new King(`../../images/king_${type}.png`, 3, y, pieceType.KING, team, []))
+    // initialeBoardState.push({ image: `../../images/king_${type}.png`, x: 3, y: y, type: pieceType.KING, team: team, name: "King" })
+    testClass.push(new Queen(`../../images/queen_${type}.png`, 4, y, pieceType.QUEEN, team, []))
+    // initialeBoardState.push({ image: `../../images/queen_${type}.png`, x: 4, y: y, type: pieceType.QUEEN, team: team, name: "Queen" })
+}
+
+for (let p of testClass) {
+    let position = p.determination(p)
+    p.position.push(position)
+}
+
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
     const [pieces, setPieces] = useState(testClass);
@@ -63,12 +84,8 @@ export default function Chessboard() {
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
-    
-pieces.forEach(piece => {
-    const position = determination.determination(piece)
-    piece.position.push(position)
-})
-console.log(pieces);
+
+    console.log(pieces);
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target 

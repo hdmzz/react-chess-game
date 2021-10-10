@@ -1,11 +1,15 @@
-export default class KnightDetermination{
-    determination(piece, chessboard) {
-        const knight = [piece]
+import Pieces from "../components/pieces/pieces"    
+
+export default class Knight extends Pieces {
+    constructor(image, x, y, type, team, position) {
+        super(image, x, y, type, team, position)
+    }
+    determination(piece) {
+        const knight = []
         for(let i = -1; i < 2 ; i+= 2) {
             let possibleMove = (piece.x + i > 7 || piece.x + i < 0) ? false : (piece.y + 2 * i < 0 || piece.y + 2 * i > 7) ? false : {
                 x: piece.x + i,
                 y: piece.y + 2 * i,
-                pm: 1
             }
             knight.push(possibleMove)
         }
@@ -14,7 +18,6 @@ export default class KnightDetermination{
             let possibleMove = (piece.x + 2 * i > 7 || piece.x + 2 *i < 0) ? false : (piece.y + i < 0 || piece.y + i > 7) ? false : {
                 x: piece.x + 2 * i,
                 y: piece.y + i, 
-                pm: 2
             }
             knight.push(possibleMove)
         }
@@ -65,5 +68,6 @@ export default class KnightDetermination{
             }
             knight.push(possibleMove)
         }
+        return knight
     }
-}     
+}
