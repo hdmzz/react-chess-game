@@ -5,10 +5,10 @@
 //pour une histoire de performance de l'appli
 export default class RookDetermination {
     determination(piece, n) {
+        const rook = [piece]
         if (n === undefined){
             n = 8
         }
-        const rook = [piece]
         for (let i = 1; i < n; i++) {
             let possibleMove = {
                 x: piece.x,

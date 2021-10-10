@@ -3,14 +3,18 @@ import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
 import Determination from '../../services/determination';
+import Pawn from "../../services/determination"
+import Pieces from '../pieces/pieces';
 
-const referee = new Referee()
-const determination = new Determination()
+const referee = new Referee();
+const determination = new Pawn();
+
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalIndex = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
 export const pieceType = {
-    PAWN: 1,//pion
-    ROOK: 2,//tour
+    PAWN: 1,
+    ROOK: 2,
     KNIGHT: 3,
     BISHOP: 4,
     KING: 5,
@@ -23,12 +27,22 @@ export const teamTurn = {
 }
 
 const initialeBoardState = [];
+const testClass = [];
+//fonctionne 
+for (let i = 0; i < 8; i++){
+    let pawnB = new Pawn("../../images/pawn_b.png", i, 6,  pieceType.PAWN, teamTurn.BLACK, [])
+    let pawnW = new Pawn("../../images/pawn_w.png", i, 1,  pieceType.PAWN, teamTurn.WHITE, [])
+    testClass.push(pawnB, pawnW)
+} 
+
+
+
 for (let i = 0; i < 8; i++){
     initialeBoardState.push({ image: "../../images/pawn_b.png", x: i, y: 6, type: pieceType.PAWN, team: teamTurn.BLACK, name: "Pawn" })//x-------  y|||||||
     initialeBoardState.push({ image: "../../images/pawn_w.png", x: i, y: 1, type: pieceType.PAWN, team: teamTurn.WHITE, name: "Pawn" })
 }
 
-for (let p = 0; p < 2; p++) {
+/* for (let p = 0; p < 2; p++) {
     const type = (p === 0) ? "b" : "w"
     const team = (p === 0) ? teamTurn.BLACK : teamTurn.WHITE
     const y = (p === 0) ? 7 : 0
@@ -40,19 +54,21 @@ for (let p = 0; p < 2; p++) {
     initialeBoardState.push({ image: `../../images/bishop_${type}.png`, x: 5, y: y, type: pieceType.BISHOP, team: team, name: "Bishop" })
     initialeBoardState.push({ image: `../../images/king_${type}.png`, x: 3, y: y, type: pieceType.KING, team: team, name: "King" })
     initialeBoardState.push({ image: `../../images/queen_${type}.png`, x: 4, y: y, type: pieceType.QUEEN, team: team, name: "Queen" })
-}
-
+} */
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
-    const [pieces, setPieces] = useState(initialeBoardState);
+    const [pieces, setPieces] = useState(testClass);
     const [grabX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [grabY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
     
-    determination.determinationPosition(pieces)
-
+pieces.forEach(piece => {
+    const position = determination.determination(piece)
+    piece.position.push(position)
+})
+console.log(pieces);
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target 

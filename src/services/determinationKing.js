@@ -9,6 +9,5 @@ export default class KingDetermination {
         const verticalAndHorizontalMove = rookDeter.determination(piece, 2)
         const diagonalMove = bishopDetermination.determination(piece, 2)
         king.push(verticalAndHorizontalMove.concat(diagonalMove))
-        console.log(king);
     }
 }

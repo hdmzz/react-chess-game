@@ -4,13 +4,15 @@ import KnightDetermination from "./determinationKnight";
 import BishopDetermination from "./determinationBishop";
 import QueenDetermination from "./determinationQueen";
 import KingDetermination from "./determinationKing";
+import Pieces from "../components/pieces/pieces";
+
 const rookDeter =  new RookDetermination();
 const knightDeter = new KnightDetermination();
 const bishopDeter = new BishopDetermination();
 const queenDeter = new QueenDetermination();
 const kingDeter = new KingDetermination();
 
-export default class Determination {
+export class Determination {
     determinationPosition(chessboard) {
         chessboard.forEach(piece => {
             if (piece.type === pieceType.PAWN) {
@@ -33,9 +35,8 @@ export default class Determination {
             }
         });
     }
-
+    
     determinationPawn(piece) {
-        let pawn = [piece]
         let possibleMove = {
             name: piece.name,
             z: {
@@ -51,6 +52,26 @@ export default class Determination {
                 y: piece.y + ((piece.y === 1) ? 2 : -2)
             }
         }
-        pawn.push(possibleMove)
+        return possibleMove
     } 
+}
+
+export default class Pawn extends Pieces {
+    constructor(image, x, y, type, team, position) {
+        super(image, x, y, type, team)
+        this.position = position
+    }
+    determination(piece) {
+        let possibleMove = {
+            a: {
+                x: piece.x ,
+                y: piece.y + ((piece.y === 1) ? 1 : -1)
+            },
+            b: {
+                x: piece.x,
+                y: piece.y + ((piece.y === 1) ? 2 : -2)
+            }
+        }
+        return possibleMove
+    }
 }
