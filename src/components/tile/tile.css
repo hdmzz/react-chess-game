@@ -21,6 +21,15 @@ img{
     background-position: center;
     background-size: 80px;
 }
+
+.occupied{
+    background-color: red;
+}
+
+.empty{
+    background-color: green;
+}
+
 .box .piece:hover{
     cursor: grab;
 }

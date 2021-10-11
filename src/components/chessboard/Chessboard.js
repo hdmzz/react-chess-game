@@ -3,12 +3,12 @@ import Tile from '../tile/Tile'
 import './chessboard.css'
 import Referee from '../referee/referee';
 import Pawn from "../../services/determination"
-import Pieces from '../pieces/pieces';
 import Rook from '../../services/determinationRook';
 import Knight from '../../services/determinationKnight';
 import Bishop from '../../services/determinationBishop'
 import Queen from '../../services/determinationQueen';
 import King from '../../services/determinationKing';
+
 const referee = new Referee();
 
 const horizontalIndex = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -48,22 +48,25 @@ for (let p = 0; p < 2; p++) {
     testClass.push(new Queen(`../../images/queen_${type}.png`, 4, y, pieceType.QUEEN, team, []))
 }
 
+testClass.forEach(p => {
+    p.position = p.determination(p)
+})
 
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
-    const [pieces, setPieces] = useState(testClass);
+    const [pieces, setPieces] = useState(testClass);//pieces contient les instances des differentes classes ainsi que 
     const [grabX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [grabY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
     
-    const newArray = [...pieces]
+    /* const newArray = [...pieces]
     newArray.map(p => {
         const position = p.determination(p)
         p.position = position
     })
-    setPieces(newArray)
+    setPieces(newArray) */
 
     function grabPiece(e){
         const chessboard = chessboardRef.current
@@ -92,9 +95,8 @@ export default function Chessboard() {
             const x = Math.floor(e.target.offsetLeft / 100) ;//on a des coordonnées de position
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
-            const currentPiece = pieces.find(p => (p.x === grabX && p.y === grabY))//La piece que l'on bouge
+            const currentPiece = pieces.find(p => (p.x === grabX && p.y === grabY))//La piece que l'on bouge sur laquelle on a fait le premier clic 
             const attackedPiece = pieces.find(p => (p.x === x && p.y === y))//La piece sur laquelle on lache la currentPiece doit partir
-            console.log(attackedPiece);
             if (currentPiece) {
                 const isValid = referee.isValid(grabX, grabY, x, y, currentPiece.type, team, pieces)
                 if (isValid) {
@@ -104,10 +106,17 @@ export default function Chessboard() {
                         newPieces.splice(newPieces.indexOf(attackedPiece), 1)//l'element attaqué est remplacé supprimé de l'array
                     }
                     //les nouvelles coordonnees du pion 
-                    const newPositionPiece = {...currentPiece, x: x, y: y}
-                    const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
-                        newPieces.splice(index, 1, newPositionPiece)
-                        setPieces(newPieces)
+                    //on overwrite sur la piece directement pas de rendue du tableau pieces en entier 
+                    currentPiece.x = x
+                    currentPiece.y = y
+                    currentPiece.position = currentPiece.determination(currentPiece)
+                    currentPiece.position.forEach(p => {
+                        referee.tileIsOccupied(p.x,p.y, pieces)
+                    })
+                    // const newPositionPiece = {...currentPiece, x: x, y: y}
+                    // const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
+                        // newPieces.splice(index, 1)
+                        // setPieces(newPieces)
                         setTeam(!currentPiece.team)
                         setActivePiece(null)
                         setClick(true)
@@ -119,7 +128,6 @@ export default function Chessboard() {
             }
         }
     }
-    
     let board = [];
     for (let j = 0; j < verticalIndex.length; j++){
         for (let i = 0; i < horizontalIndex.length; i++){

@@ -3,9 +3,6 @@
 import Pieces from "../components/pieces/pieces";
 
 export default class Rook extends Pieces {
-    constructor(image, x, y, type, team, position) {
-        super(image, x, y, type, team, position)
-    }
     determination(piece, n) {
         let rook = []
         if (n === undefined){

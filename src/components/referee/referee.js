@@ -4,9 +4,12 @@ export default class Referee {
     tileIsOccupied(x, y, chessboard) {
         const piece = chessboard.find( p => (p.x === x && p.y === y))
         if (piece) {
-            console.log('tileIsOccupied running');
+            console.log('tileIsOccupied');
+            console.log(x, ' ', y );
             return true 
         } else {
+            console.log('libre');
+            console.log(x, ' ', y );
             return false
         }
     }
@@ -23,7 +26,7 @@ export default class Referee {
 
     isValid(px, py, x, y, type, team, chessboard){
         if (type === pieceType.PAWN) {
-            const row = (team === true) ? 1 : 6;//si team true ===> white alors axe x = 1 sinon egal a 6
+            const row = (team === true) ? 1 : 6;//si team true ===> white alors axe y = 1 sinon egal a 6
             const pawnDirection = (team === true) ? 1 : -1;
             const xDirection = x - px;
             if (px === x && py === row && y - py === 2*pawnDirection) {

@@ -1,9 +1,6 @@
 import Pieces from "../components/pieces/pieces"    
 
 export default class Knight extends Pieces {
-    constructor(image, x, y, type, team, position) {
-        super(image, x, y, type, team, position)
-    }
     determination(piece) {
         const knight = []
         for(let i = -1; i < 2 ; i+= 2) {

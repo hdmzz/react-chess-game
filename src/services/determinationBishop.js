@@ -1,9 +1,7 @@
 import Pieces from "../components/pieces/pieces"
 
 export default class Bishop extends Pieces {
-    constructor(image, x, y, type, team, position) {
-        super(image, x, y, type, team, position)
-    }
+    
     determination(piece, n) {
         if (n === undefined){
             n = 8
