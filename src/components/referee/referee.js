@@ -98,8 +98,6 @@ export default class Referee {
                         return true
                     } 
                 }
-                
-                
                 // mouvement haut gauche 
                 if (x < px && y < py) {
                     let possiblePosition = {x: px - i, y: py - i};
@@ -122,8 +120,6 @@ export default class Referee {
                         return true
                     }
                 }
-                
-                
                 //mouvement bas droite
                 if (x > px && y > py) {
                     let possiblePosition = {x: px + i, y: py + i};
@@ -149,8 +145,6 @@ export default class Referee {
                         return true
                     }
                 }
-                
-                
                 //mouvement bas gauche
                 if (x < px && y > py) {
                     let possiblePosition = {x: px - i, y: py + i};

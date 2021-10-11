@@ -7,9 +7,6 @@ export default class Pieces {
         this.team = team
         this.position = position
     }
-    determination() {
-        console.log("helo");
-    }
 }
 
 
