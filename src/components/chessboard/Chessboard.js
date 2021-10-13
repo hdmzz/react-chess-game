@@ -74,10 +74,9 @@ export default function Chessboard() {
         if ((e.target.className === 'piece') && chessboard) {
             const grabX = Math.floor(element.offsetLeft / 100)
             const grabY = Math.floor(element.offsetTop / 100)
-            const piece = pieces.find(p => p.x === grabX && p.y === grabY)
-            console.log(piece);
+            const currentPiece = pieces.find(p => p.x === grabX && p.y === grabY)
             //Gestion du tour 
-            if (piece.team !== team) {
+            if (currentPiece.team !== team) {
                 return 
             } else {
                 setX(grabX)
@@ -91,15 +90,16 @@ export default function Chessboard() {
     function dropPiece(e) {
         const chessboard = chessboardRef.current;
         if (activePiece && chessboard){
-            //NOUVELLES COORDONN2ES
+            //NOUVELLES COORDONN2ES de la piece choisi
             const x = Math.floor(e.target.offsetLeft / 100) ;//on a des coordonnées de position
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
             const currentPiece = pieces.find(p => (p.x === grabX && p.y === grabY))//La piece que l'on bouge sur laquelle on a fait le premier clic 
             const attackedPiece = pieces.find(p => (p.x === x && p.y === y))//La piece sur laquelle on lache la currentPiece doit partir
+            //Nouvelle logique dplcmnt ========================================
             if (currentPiece) {
-                const isValid = referee.isValid(grabX, grabY, x, y, currentPiece.type, team, pieces)
-                if (isValid) {
+                const validMove = currentPiece.position.find(position => (position.x === x && position.y === y))
+                if (validMove) {
                     const newPieces = pieces
                     if (attackedPiece) {
                         console.log(newPieces.indexOf(attackedPiece));
@@ -110,9 +110,11 @@ export default function Chessboard() {
                     currentPiece.x = x
                     currentPiece.y = y
                     currentPiece.position = currentPiece.determination(currentPiece)
-                    currentPiece.position.forEach(p => {
+                    console.log(currentPiece);
+                    currentPiece.position.forEach(p => { 
                         referee.tileIsOccupied(p.x,p.y, pieces)
                     })
+
                     // const newPositionPiece = {...currentPiece, x: x, y: y}
                     // const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
                         // newPieces.splice(index, 1)
@@ -120,7 +122,7 @@ export default function Chessboard() {
                         setTeam(!currentPiece.team)
                         setActivePiece(null)
                         setClick(true)
-                } else if (!isValid) {
+                } else if (!validMove) {
                         setX(0)
                         setY(0)
                         setClick(true)
