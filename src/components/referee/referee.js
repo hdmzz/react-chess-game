@@ -25,7 +25,7 @@ export default class Referee {
     }
 
     isValid(px, py, x, y, type, team, chessboard){
-        if (type === pieceType.PAWN) {
+        /* if (type === pieceType.PAWN) {
             const row = (team === true) ? 1 : 6;//si team true ===> white alors axe y = 1 sinon egal a 6
             const pawnDirection = (team === true) ? 1 : -1;
             const xDirection = x - px;
@@ -47,7 +47,7 @@ export default class Referee {
                 }
             }
             //logic deplacement KNIGHT
-        } else if (type === pieceType.KNIGHT) {
+        } else */ /* if (type === pieceType.KNIGHT) {
             for (let i = -1; i < 2; i += 2) {
                 for (let j = -1; j <  2; j += 2) {
                     if (py - y === 2 * i) {// equivalent a  if (py - y === 2 * -1 || 2 * 1) 
@@ -76,7 +76,7 @@ export default class Referee {
                 }
             }
             //LOgique DEPLACEMTN BISHOP
-        } else if (type === pieceType.BISHOP) {
+        } else*/ if (type === pieceType.BISHOP) {
             console.log('Bishop');
             for (let i = 1; i < 8 ; i += 1) {
                 //mouvement haut droite
@@ -129,9 +129,6 @@ export default class Referee {
                     if (possiblePosition.x > x && possiblePosition.y > y){
                         break
                     }
-                    console.log(x, y);
-                    console.log('possiblposition');
-                    console.log(possiblePosition);
                     if (this.tileIsOccupied(possiblePosition.x, possiblePosition.y, chessboard)){
                         if (this.tileIsOccupiedByOpponent(possiblePosition.x, possiblePosition.y, chessboard, team)){
                             if(x > possiblePosition.x && y > possiblePosition.y) {
