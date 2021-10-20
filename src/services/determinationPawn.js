@@ -20,10 +20,11 @@ export default class Pawn extends Pieces {
             } 
             return possibleAttack
         }, [])
-        console.log(possibleAttack);
+        console.log(...possibleAttack);
         //comment ajouter les deplcement d'attack si les cases sont occupées par l'opposant
+        const possibleMove = []
         if (piece.y === specialRow) {
-            let possibleMove = [
+            possibleMove.push(
                 {
                     x: piece.x ,
                     y: piece.y + direction
@@ -31,23 +32,19 @@ export default class Pawn extends Pieces {
                 {
                     x: piece.x,
                     y: piece.y + 2 * direction
-                }, 
-                {
-                    attack: [
-                        attack
-                    ]
-                }
-            ]
-            return possibleMove
+                },
+                ...possibleAttack
+            )
         } else {
-            let possibleMove = [
+            possibleMove.push(
                 {
                     x: piece.x ,
                     y: piece.y + direction
-                }
-            ]   
-            return possibleMove
+                },
+                ...possibleAttack
+            )
         }
+        return possibleMove
     }
     attackingDetermination(piece, direction) {
         let possibleAttack = (direction === 1) ? 

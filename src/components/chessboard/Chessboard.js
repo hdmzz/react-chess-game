@@ -71,7 +71,8 @@ export default function Chessboard() {
             const grabX = Math.floor(element.offsetLeft / 100)
             const grabY = Math.floor(element.offsetTop / 100)
             const currentPiece = testClass.find(p => p.x === grabX && p.y === grabY)
-            currentPiece.determination(currentPiece)
+            currentPiece.position = currentPiece.determination(currentPiece)
+
             //Gestion du tour 
             if (currentPiece.team !== team) {
                 return 
