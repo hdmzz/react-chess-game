@@ -97,13 +97,19 @@ export default function Chessboard() {
             //Nouvelle logique dplcmnt ========================================
             if (currentPiece) {
                 const validMove = currentPiece.position.find(position => (position.x === x && position.y === y))
+                console.log(validMove);
                 if (validMove) {
                     const occupied = referee.tileIsOccupied(x, y, testClass)
                     console.log(occupied);
                     if (occupied) {
-                        const isOpponent = referee.tileIsOccupiedByOpponent(x, y , testClass, attackedPiece.team)
+                        const isOpponent = referee.tileIsOccupiedByOpponent(x, y , testClass, currentPiece.team)
+                        console.log(isOpponent);
                         if (isOpponent) {
-                            console.log(isOpponent);
+                            const index =  testClass.indexOf(attackedPiece)
+                            testClass.splice(index, 1)
+                            currentPiece.x = x
+                            currentPiece.y = y
+                            currentPiece.position = currentPiece.determination(currentPiece)
                         }
                     }
                     if (occupied === false) {

@@ -12,10 +12,7 @@ export default class Pawn extends Pieces {
         // console.log(attack);
         const possibleAttack = attack.reduce((possibleAttack, position) => {
             const isOccupiedByOpponent = referee.tileIsOccupiedByOpponent(position.x, position.y, testClass, piece.team)
-            console.log(isOccupiedByOpponent);
             if (isOccupiedByOpponent){
-                console.log('true');
-                console.log(position);
                 possibleAttack.push(position)
             } 
             return possibleAttack
