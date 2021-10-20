@@ -102,7 +102,6 @@ export default function Chessboard() {
                         const isOpponent = referee.tileIsOccupiedByOpponent(x, y , testClass, attackedPiece.team)
                         if (isOpponent) {
                             console.log(isOpponent);
-                            console.log(currentPiece.team+ ' '+'attack!');
                         }
                     }
                     if (occupied === false) {

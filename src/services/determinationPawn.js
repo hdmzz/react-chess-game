@@ -7,10 +7,8 @@ export default class Pawn extends Pieces {
     determination(piece) {
         const specialRow = (piece.team === true) ? 1 : 6 
         const direction = (piece.team === true) ? 1 : -1
-        const attack = this.attackingDetermination(piece, direction)
-        attack.forEach(p => {
-            console.log(referee.tileIsOccupiedByOpponent(p.x, p.y, testClass, piece.team))
-        })
+        const attack = this.attackingDetermination(piece, direction)//renvoie un array de 2 position
+        
         //comment ajouter les deplcement d'attack si les cases sont occupées par l'opposant
         if (piece.y === specialRow) {
             let possibleMove = [
