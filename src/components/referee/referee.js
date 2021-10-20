@@ -4,12 +4,8 @@ export default class Referee {
     tileIsOccupied(x, y, chessboard) {
         const piece = chessboard.find( p => (p.x === x && p.y === y))
         if (piece) {
-            console.log('tileIsOccupied');
-            console.log(x, ' ', y );
             return true 
         } else {
-            console.log('libre');
-            console.log(x, ' ', y );
             return false
         }
     }
