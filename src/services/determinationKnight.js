@@ -9,6 +9,7 @@ export default class Knight extends Pieces {
                 y: piece.y + 2 * i,
             }
             knight.push(possibleMove)
+
         }
         //LeftUp RightBottom========FONCTIONNEOKOKOK
         for(let i = -1; i < 2 ; i+= 2) {

@@ -5,7 +5,6 @@ const referee = new Referee();
 
 export default class Pawn extends Pieces {
     determination(piece) {
-        console.log(piece);
         const specialRow = (piece.team === true) ? 1 : 6 
         const direction = (piece.team === true) ? 1 : -1
         const attack = this.attackingDetermination(piece, direction)//renvoie un array de 2 position
@@ -17,7 +16,6 @@ export default class Pawn extends Pieces {
             } 
             return possibleAttack
         }, [])
-        console.log(...possibleAttack);
         //comment ajouter les deplcement d'attack si les cases sont occupées par l'opposant
         const possibleMove = []
         if (piece.y === specialRow) {

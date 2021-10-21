@@ -8,5 +8,3 @@ export default class Pieces {
         this.position = position
     }
 }
-
-
