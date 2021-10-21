@@ -15,7 +15,8 @@ export default class Rook extends Pieces {
         for (let i = 1; i < n; i++) {
             let possibleMove = {
                 x: piece.x,
-                y: piece.y - i
+                y: piece.y - i,
+                attack: 1
             }
             if (possibleMove.y < 0) break;
 
@@ -26,7 +27,8 @@ export default class Rook extends Pieces {
         for (let i = 1; i < n; i++) {
             let possibleMove = {
                 x: piece.x,
-                y: piece.y + i
+                y: piece.y + i,
+                attack: 1
             }
             if (possibleMove.y > 7) break;
             rook.push(possibleMove)
@@ -36,7 +38,8 @@ export default class Rook extends Pieces {
         for (let i = 1; i < n; i++) {
             let possibleMove = {
                 x: piece.x - i,
-                y: piece.y
+                y: piece.y,
+                attack: 1
             }
             if (possibleMove.x < 0) break;
             rook.push(possibleMove)
@@ -46,7 +49,8 @@ export default class Rook extends Pieces {
         for (let i = 1; i < n; i++) {
             let possibleMove = {
                 x: piece.x + i,
-                y: piece.y
+                y: piece.y,
+                attack: 1
             }
             if (possibleMove.x > 7) break;
             rook.push(possibleMove)

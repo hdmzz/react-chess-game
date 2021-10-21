@@ -14,7 +14,8 @@ export default class Bishop extends Pieces {
             let possibleMove =
             {
                 x: piece.x + i,
-                y: piece.y - i
+                y: piece.y - i,
+                attack: 1
             }
             bishop.push(possibleMove)
             const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
@@ -25,7 +26,8 @@ export default class Bishop extends Pieces {
             let possibleMove =
             {
                 x: piece.x - i,
-                y: piece.y + i
+                y: piece.y + i,
+                attack: 1
             }
             bishop.push(possibleMove)
             const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
@@ -36,7 +38,8 @@ export default class Bishop extends Pieces {
             let possibleMove =
             {
                 x: piece.x - i,
-                y: piece.y - i
+                y: piece.y - i,
+                attack: 1
             }
             bishop.push(possibleMove)
             const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
@@ -47,7 +50,8 @@ export default class Bishop extends Pieces {
             let possibleMove =
             {
                 x: piece.x + i,
-                y: piece.y + i
+                y: piece.y + i,
+                attack: 1
             }
             bishop.push(possibleMove)
             const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)

@@ -21,12 +21,14 @@ export default class Pawn extends Pieces {
         if (piece.y === specialRow) {
             possibleMove.push(
                 {
-                    x: piece.x ,
-                    y: piece.y + direction
+                    x: piece.x,
+                    y: piece.y + direction,
+                    attack: -1
                 },
                 {
                     x: piece.x,
-                    y: piece.y + 2 * direction
+                    y: piece.y + 2 * direction,
+                    attack: -1
                 },
                 ...possibleAttack
             )
@@ -34,7 +36,8 @@ export default class Pawn extends Pieces {
             possibleMove.push(
                 {
                     x: piece.x ,
-                    y: piece.y + direction
+                    y: piece.y + direction,
+                    attack: -1
                 },
                 ...possibleAttack
             )
@@ -46,20 +49,24 @@ export default class Pawn extends Pieces {
         [
             {
                 x: (piece.x - 1 < 0) ? null : piece.x - 1,
-                y: (piece.y + 1 > 7) ? null : piece.y + 1
+                y: (piece.y + 1 > 7) ? null : piece.y + 1,
+                attack: 1
             },
             {
                 x: (piece.x + 1 > 7) ? null : piece.x + 1,
-                y: (piece.y + 1 > 7) ? null : piece.y + 1
+                y: (piece.y + 1 > 7) ? null : piece.y + 1,
+                attack: 1
             }
         ] : [
             {
                 x: (piece.x + 1 > 7) ? null : piece.x + 1,
-                y: (piece.y - 1 < 0) ? null : piece.y - 1
+                y: (piece.y - 1 < 0) ? null : piece.y - 1,
+                attack: 1
             },
             {
                 x: (piece.x - 1 < 0) ? null : piece.x - 1,
-                y: (piece.y - 1 < 0) ? null : piece.y - 1
+                y: (piece.y - 1 < 0) ? null : piece.y - 1,
+                attack: 1
             }
         ]
         return possibleAttack

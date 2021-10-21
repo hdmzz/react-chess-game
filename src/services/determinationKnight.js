@@ -7,6 +7,7 @@ export default class Knight extends Pieces {
             let possibleMove = (piece.x + i > 7 || piece.x + i < 0) ? false : (piece.y + 2 * i < 0 || piece.y + 2 * i > 7) ? false : {
                 x: piece.x + i,
                 y: piece.y + 2 * i,
+                attack: 1
             }
             knight.push(possibleMove)
 
@@ -16,6 +17,7 @@ export default class Knight extends Pieces {
             let possibleMove = (piece.x + 2 * i > 7 || piece.x + 2 *i < 0) ? false : (piece.y + i < 0 || piece.y + i > 7) ? false : {
                 x: piece.x + 2 * i,
                 y: piece.y + i, 
+                attack: 1
             }
             knight.push(possibleMove)
         }
@@ -23,7 +25,8 @@ export default class Knight extends Pieces {
         for(let i = -1; i < 2 ; i += 2) {
             let possibleMove = {
                 x: null,
-                y: null
+                y: null,
+                attack: 1
             }
             possibleMove.x = piece.x + i
             if (piece.x + i < piece.x) {
@@ -46,7 +49,8 @@ export default class Knight extends Pieces {
         for(let i = -1; i < 2 ; i += 2) {
             let possibleMove = {
                 x: null,
-                y: null
+                y: null,
+                attack: 1
             }
             if (piece.x + 2*i > piece.x && piece.x + 2*i <= 7 && piece.x + 2*i >= 0) {//tourne a droite
                 if (piece.y - 1 < 0) {
