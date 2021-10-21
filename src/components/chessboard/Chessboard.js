@@ -93,8 +93,10 @@ export default function Chessboard() {
             const x = Math.floor(e.target.offsetLeft / 100) ;//on a des coordonnées de position
             const y = Math.floor(e.target.offsetTop / 100);
             //COMPARISON AUX ANCIENNES COORDO PUIS VERIF
-            const currentPiece = testClass.find(p => (p.x === grabX && p.y === grabY))//La piece que l'on bouge sur laquelle on a fait le premier clic 
-            const attackedPiece = testClass.find(p => (p.x === x && p.y === y))//La piece sur laquelle on lache la currentPiece doit partir
+            //La piece que l'on bouge sur laquelle on a fait le premier clic 
+            const currentPiece = testClass.find(p => (p.x === grabX && p.y === grabY))
+            //La piece sur laquelle on lache la currentPiece doit partir on la trouvera avec indeOf
+            const attackedPiece = testClass.find(p => (p.x === x && p.y === y))
             //Nouvelle logique dplcmnt ========================================
             if (currentPiece) {
                 const validMove = currentPiece.position.find(position => (position.x === x && position.y === y))
@@ -119,15 +121,10 @@ export default function Chessboard() {
                         currentPiece.x = x
                         currentPiece.y = y
                         currentPiece.position = currentPiece.determination(currentPiece)
-                        // console.log(currentPiece);
                         currentPiece.position.forEach(p => { 
                             referee.tileIsOccupied(p.x,p.y, testClass)
                         })
                     }
-                    // const newPositionPiece = {...currentPiece, x: x, y: y}
-                    // const index = newPieces.findIndex(p => (p.x === grabX && p.y === grabY))                    
-                        // newPieces.splice(index, 1)
-                        // setPieces(newPieces)
                         setTeam(!currentPiece.team)
                         setActivePiece(null)
                         setClick(true)
