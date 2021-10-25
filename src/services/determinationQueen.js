@@ -10,7 +10,7 @@ export default class Queen extends Pieces {
         const queen = [];
         const verticalAndHorizontalMove = rookDeter.determination(piece)
         const diagonalMove = bishopDetermination.determination(piece)
-        queen.push(verticalAndHorizontalMove.concat(diagonalMove))
+        queen.push(...verticalAndHorizontalMove.concat(diagonalMove))
         return queen
     }
 } 

@@ -44,11 +44,9 @@ for (let p = 0; p < 2; p++) {
     testClass.push(new King(`../../images/king_${type}.png`, 3, y, pieceType.KING, team, []))
     testClass.push(new Queen(`../../images/queen_${type}.png`, 4, y, pieceType.QUEEN, team, []))
 }
-
 testClass.forEach(p => {
     p.position = p.determination(p)
 })
-
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
     //pieces contient les instances des differentes classes ainsi que 
@@ -57,13 +55,6 @@ export default function Chessboard() {
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
-    
-    /* const newArray = [...pieces]
-    newArray.map(p => {
-        const position = p.determination(p)
-        p.position = position
-    })
-    setPieces(newArray) */
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target 
@@ -72,8 +63,7 @@ export default function Chessboard() {
             const grabY = Math.floor(element.offsetTop / 100)
             const currentPiece = testClass.find(p => p.x === grabX && p.y === grabY)
             console.log(currentPiece);
-            currentPiece.position = currentPiece.determination(currentPiece)
-
+            currentPiece.position = currentPiece.determination(currentPiece) 
             //Gestion du tour 
             if (currentPiece.team !== team) {
                 return 
@@ -85,7 +75,6 @@ export default function Chessboard() {
             }
         }
     }
-
     function dropPiece(e) {
         const chessboard = chessboardRef.current;
         if (activePiece && chessboard){
@@ -102,17 +91,16 @@ export default function Chessboard() {
                 const validMove = currentPiece.position.find(position => (position.x === x && position.y === y))
                 if (validMove) {
                     const occupied = referee.tileIsOccupied(x, y, testClass)
-                    console.log(occupied);
                     if (occupied) {
                         const isOpponent = referee.tileIsOccupiedByOpponent(x, y , testClass, currentPiece.team)
                         console.log(isOpponent);
                         currentPiece.position.forEach(p => {
                             if (isOpponent && p.attack === 1){
-                                const index =  testClass.indexOf(attackedPiece)
-                                testClass.splice(index, 1)
                                 currentPiece.x = x
                                 currentPiece.y = y
                                 currentPiece.position = currentPiece.determination(currentPiece)
+                                attackedPiece.x = -1
+                                attackedPiece.y = -1
                             } else {
                                 return
                             }

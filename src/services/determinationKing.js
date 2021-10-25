@@ -9,7 +9,7 @@ export default class King extends Pieces {
         const king = [];
         const verticalAndHorizontalMove = rookDeter.determination(piece, 2)
         const diagonalMove = bishopDetermination.determination(piece, 2)
-        king.push(verticalAndHorizontalMove.concat(diagonalMove))
+        king.push(...verticalAndHorizontalMove.concat(diagonalMove))
         return king
     }
 }
