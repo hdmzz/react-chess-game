@@ -16,4 +16,7 @@ export default class Referee {
             return false
         } 
     }
+    checkmate() {
+        
+    }
 }
