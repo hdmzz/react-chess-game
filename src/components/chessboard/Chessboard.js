@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
-import Referee from '../referee/referee';
 import Pawn from "../../services/determinationPawn"
+import Referee from '../referee/referee';
 import Rook from '../../services/determinationRook';
 import Knight from '../../services/determinationKnight';
 import Bishop from '../../services/determinationBishop'
@@ -48,7 +48,6 @@ testClass.forEach(p => {
     p.position = p.determination(p)
 })
 export default function Chessboard() {
-    
     const [activePiece, setActivePiece] = useState(null)
     //pieces contient les instances des differentes classes ainsi que 
     const [grabX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
@@ -56,7 +55,6 @@ export default function Chessboard() {
     const [firstClick, setClick] = useState(true)
     const [team, setTeam] = useState(true);//on commence par les blancs??!
     const chessboardRef = useRef(null);
-
     let board = [];
     //vertical index = y
     //horizontal index = x
@@ -72,7 +70,6 @@ export default function Chessboard() {
             board.push(<Tile key={`${i},${j}`} number={number} image={image} x={i} y={j}/>)
         }
     }
-    
     function grabPiece(e){
         const chessboard = chessboardRef.current
         const element = e.target
@@ -82,10 +79,6 @@ export default function Chessboard() {
             const grabY = Math.floor(element.offsetTop / 100);
             const currentPiece = testClass.find(p => p.x === grabX && p.y === grabY);
             currentPiece.position = currentPiece.determination(currentPiece) 
-            currentPiece.position.forEach(p => {
-                const psblPostn = board.find(d => d.props.x === p.x && d.props.y === p.y)
-                console.log(psblPostn._owner.child.child);
-            })
             //Gestion du tour 
             if (currentPiece.team !== team) {
                 return 
