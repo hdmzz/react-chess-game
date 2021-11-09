@@ -1,4 +1,4 @@
-import Pawn from "../../services/determinationPawn"
+import { pieceType } from "../chessboard/Chessboard";
 export default class Referee {
     tileIsOccupied(x, y, chessboard) {
         const piece = chessboard.find( p => (p.x === x && p.y === y))
@@ -11,16 +11,18 @@ export default class Referee {
     tileIsOccupiedByOpponent(x, y , chessboard, team) {
         const piece = chessboard.find(p => (p.x === x && p.y === y && p.team !== team))
         if (piece) {
-            if (piece instanceof Pawn) console.log("pawn");
-            console.log('occupied by opponent');
-            console.log(piece);
             return true
         } else {
             return false
-        } 
+        }
     }
-
-    checkmate() {
-
+    checkmate(x, y , chessboard, team) {
+        const piece = chessboard.find(p => (p.x === x && p.y === y && p.team !== team))
+        if (piece) {
+            if (piece.type === pieceType.KING){
+                alert('echec')
+                console.log(piece);
+            }
+        }
     }
 }

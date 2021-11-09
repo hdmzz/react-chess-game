@@ -1,6 +1,6 @@
-import Pieces from "../components/pieces/pieces"
-import Referee from "../components/referee/referee";
+import Pieces from "../components/pieces/pieces";
 import { testClass } from "../components/chessboard/Chessboard";
+import Referee from "../components/referee/referee";
 const referee = new Referee();
 
 export default class Bishop extends Pieces {

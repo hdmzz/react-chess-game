@@ -1,8 +1,8 @@
+import Referee from '../referee/referee';
 import React, { useRef, useState } from 'react'
 import Tile from '../tile/Tile'
 import './chessboard.css'
 import Pawn from "../../services/determinationPawn"
-import Referee from '../referee/referee';
 import Rook from '../../services/determinationRook';
 import Knight from '../../services/determinationKnight';
 import Bishop from '../../services/determinationBishop'
@@ -25,12 +25,14 @@ export const teamTurn = {
     WHITE: true,
     BLACK: false
 }
-export const testClass = [];
-//fonctionne 
+export const testClass = [];//testClass est le tableau qui contiendra toutes les pièces appartenant chacune à leur propre classe
+
+//Pour les pions 
 for (let i = 0; i < 8; i++){
     testClass.push(new Pawn("../../images/pawn_b.png", i, 6,  pieceType.PAWN, teamTurn.BLACK, []))
     testClass.push(new Pawn("../../images/pawn_w.png", i, 1,  pieceType.PAWN, teamTurn.WHITE, []))
 } 
+//Pour lesautres pièces 
 for (let p = 0; p < 2; p++) {
     const type = (p === 0) ? "b" : "w"
     const team = (p === 0) ? teamTurn.BLACK : teamTurn.WHITE
@@ -44,12 +46,14 @@ for (let p = 0; p < 2; p++) {
     testClass.push(new King(`../../images/king_${type}.png`, 3, y, pieceType.KING, team, []))
     testClass.push(new Queen(`../../images/queen_${type}.png`, 4, y, pieceType.QUEEN, team, []))
 }
+//on détermine pour chaque pièce les déplacements possible grâce a une fonction determination qui prend plusieurs formes 
+//Polimophysme
 testClass.forEach(p => {
     p.position = p.determination(p)
 })
+
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState(null)
-    //pieces contient les instances des differentes classes ainsi que 
     const [grabX, setX] = useState(0);//ne pas mettre 0 en valeur initiale sinon on se retrouve avce les coordonnées x 0 et y 0 rook w
     const [grabY, setY] = useState(0);
     const [firstClick, setClick] = useState(true)
@@ -108,12 +112,13 @@ export default function Chessboard() {
                     const occupied = referee.tileIsOccupied(x, y, testClass)
                     if (occupied) {
                         const isOpponent = referee.tileIsOccupiedByOpponent(x, y , testClass, currentPiece.team)
-                        console.log(isOpponent);
                         currentPiece.position.forEach(p => {
                             if (isOpponent && p.attack === 1){
                                 currentPiece.x = x
                                 currentPiece.y = y
-                                currentPiece.position = currentPiece.determination(currentPiece)
+                                testClass.forEach(p => {
+                                    p.position = p.determination(p)
+                                })
                                 attackedPiece.x = -1
                                 attackedPiece.y = -1
                             } else {
@@ -126,11 +131,19 @@ export default function Chessboard() {
                         //on overwrite sur la piece directement pas de rendue du tableau testClass/pieces en entier 
                         currentPiece.x = x
                         currentPiece.y = y
-                        currentPiece.position = currentPiece.determination(currentPiece)
+                        testClass.forEach(p => {
+                            p.position = p.determination(p)
+                        })
                         currentPiece.position.forEach(p => { 
                             referee.tileIsOccupied(p.x,p.y, testClass)
                         })
                     }
+                    //le checkmate interviendra ici
+                        testClass.forEach(p => {
+                            p.position.forEach(c => {
+                                referee.checkmate(c.x, c.y, testClass, p.team)
+                            })
+                        })
                         setTeam(!currentPiece.team)
                         setActivePiece(null)
                         setClick(true)
@@ -142,7 +155,6 @@ export default function Chessboard() {
             }
         }
     }
-
     return (
         <div 
         onClick= {firstClick ? (e => grabPiece(e)) : (e => dropPiece(e))} 
