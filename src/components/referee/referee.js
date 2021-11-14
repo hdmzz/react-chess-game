@@ -27,7 +27,6 @@ export default class Referee {
                 return true
             }
             else {
-                console.log(`le roi ${color} est protégé`);
                 return false
             }
         }

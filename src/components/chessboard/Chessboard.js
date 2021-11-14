@@ -116,13 +116,15 @@ export default function Chessboard() {
                         currentPiece.possiblePosition.forEach(p => {
                             if (isOpponent && p.attack === 1){
                                 const attackedPiece = pieces.find(p => (p.x === x && p.y === y))
+                                if (attackedPiece) {
+                                    attackedPiece.x = -1
+                                    attackedPiece.y = -1
+                                }
                                 currentPiece.x = x
                                 currentPiece.y = y
                                 pieces.forEach(p => {
                                     p.possiblePosition = p.determination(p)
                                 })
-                                attackedPiece.x = -1
-                                attackedPiece.y = -1
                             } else {
                                 return
                             }
@@ -142,17 +144,23 @@ export default function Chessboard() {
                             referee.tileIsOccupied(p.x,p.y, pieces)
                         })
                     }
+                    setTeam(!currentPiece.team)
                     //À chaque deplacement il faut vérifier si le roi est en danger
                     //Si il est en danger l'équipe du roi en danger doit le protéger donc si checkmate est positif 2 fois de suite le mouvment est illégal
-                    let count = 0;//pas de roi en danger
-                    if (count === 0) {
+                    //pas de roi en danger
+                    if (firstCheck === 0) {
                         pieces.forEach(p => {
                             p.possiblePosition?.forEach(c => { // c = coordonées
-                                const check = referee.checkmate(c.x, c.y, pieces, p.team)
+                                const check = referee.checkmate(c.x, c.y, pieces, p.team)//il faut savoir si un enemie a les coordonnées du roi dans ses possiblePosition
                                 if (check === true) {//un des roi est en danger
-                                    count++//compte = 1
-                                    setCheck(count)
+                                    setCheck(1)
                                 } 
+                                if (check === true && p.team !== team) {
+                                    console.log('tu viens de mettre ton roi en echec mec');
+                                    currentPiece.x = grabX;//on annule le deplacement 
+                                    currentPiece.y = grabY;
+                                    setTeam(currentPiece.team)
+                                }
                             })                                      
                         })
                     }
@@ -171,12 +179,10 @@ export default function Chessboard() {
                             console.log('il faut protéger le roi');
                             setTeam(currentPiece.team)
                         } else {
+                            console.log('firstCheck = 0');
                             setCheck(0)
                             setTeam(!currentPiece.team)
-
                         }
-                    } else {
-                        setTeam(!currentPiece.team)
                     }
                     setActivePiece(null)
                     setClick(true)
