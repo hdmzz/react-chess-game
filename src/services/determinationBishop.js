@@ -1,10 +1,11 @@
 import Pieces from "../components/pieces/pieces";
-import { testClass } from "../components/chessboard/Chessboard";
+import { pieces } from "../components/chessboard/Chessboard";
 import Referee from "../components/referee/referee";
 const referee = new Referee();
 
 export default class Bishop extends Pieces {
     determination(piece, n) {
+        if (piece.x === -1 || piece.y === -1) return;
         if (n === undefined){
             n = 8
         }
@@ -18,7 +19,7 @@ export default class Bishop extends Pieces {
                 attack: 1
             }
             bishop.push(possibleMove)
-            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
+            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, pieces)
             if (isOccupied) break;
         }
         for (let i = 1; i < n; i++) { //Bas Gauche
@@ -30,7 +31,7 @@ export default class Bishop extends Pieces {
                 attack: 1
             }
             bishop.push(possibleMove)
-            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
+            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, pieces)
             if (isOccupied) break;
         }
         for (let i = 1; i < n; i++) {//Haut Gauche
@@ -42,7 +43,7 @@ export default class Bishop extends Pieces {
                 attack: 1
             }
             bishop.push(possibleMove)
-            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
+            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, pieces)
             if (isOccupied) break;
         }
         for (let i = 1; i < n; i++) { //Bas Droite
@@ -54,7 +55,7 @@ export default class Bishop extends Pieces {
                 attack: 1
             }
             bishop.push(possibleMove)
-            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, testClass)
+            const isOccupied = referee.tileIsOccupied(possibleMove.x, possibleMove.y, pieces)
             if (isOccupied) break;
         }
         return bishop

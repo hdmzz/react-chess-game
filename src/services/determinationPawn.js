@@ -1,16 +1,17 @@
 import Pieces from "../components/pieces/pieces";
 import Referee from "../components/referee/referee";
-import { testClass } from "../components/chessboard/Chessboard";
+import { pieces } from "../components/chessboard/Chessboard";
 const referee = new Referee();
 
 export default class Pawn extends Pieces {
     determination(piece) {
+        if (piece.x === -1 || piece.y === -1) return;
         const specialRow = (piece.team === true) ? 1 : 6 
         const direction = (piece.team === true) ? 1 : -1
         const attack = this.attackingDetermination(piece, direction)//renvoie un array de 2 position
         // console.log(attack);
         const possibleAttack = attack.reduce((possibleAttack, position) => {
-            const isOccupiedByOpponent = referee.tileIsOccupiedByOpponent(position.x, position.y, testClass, piece.team)
+            const isOccupiedByOpponent = referee.tileIsOccupiedByOpponent(position.x, position.y, pieces, piece.team)
             if (isOccupiedByOpponent){
                 possibleAttack.push(position)
             } 

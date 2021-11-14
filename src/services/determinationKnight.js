@@ -2,7 +2,8 @@ import Pieces from "../components/pieces/pieces"
 
 export default class Knight extends Pieces {
     determination(piece) {
-        const knight = []
+        if (piece.x === -1 || piece.y === -1) return;
+        const knight = [];
         for(let i = -1; i < 2 ; i+= 2) {
             let possibleMove = (piece.x + i > 7 || piece.x + i < 0) ? false : (piece.y + 2 * i < 0 || piece.y + 2 * i > 7) ? false : {
                 x: piece.x + i,

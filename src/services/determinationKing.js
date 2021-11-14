@@ -6,6 +6,7 @@ const rookDeter = new RookDetermination();
 
 export default class King extends Pieces {
     determination(piece) {
+        if (piece.x === -1 || piece.y === -1) return;
         const king = [];
         const verticalAndHorizontalMove = rookDeter.determination(piece, 2)
         const diagonalMove = bishopDetermination.determination(piece, 2)

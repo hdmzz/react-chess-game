@@ -29,10 +29,3 @@ img{
 .empty{
     background-color: green;
 }
-
-.box .piece:hover{
-    cursor: grab;
-}
-.box .piece:active{
-    cursor: grabbing;
-}
